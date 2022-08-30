@@ -1,0 +1,47 @@
+unit Home_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TfrmHome = class(TForm)
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+    procedure InitializeForm;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmHome: TfrmHome;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmHome }
+
+procedure TfrmHome.FormCreate(Sender: TObject);
+begin
+  InitializeForm;
+end;
+
+procedure TfrmHome.InitializeForm;
+begin
+  //form dimensions
+  frmHome.Left := 0;
+  frmHome.Top := 0;
+  frmHome.Width := Screen.Width;
+  frmHome.Height := Screen.Height;
+  frmHome.Position := poScreenCenter;
+  frmHome.WindowState := wsMaximized;
+  frmHome.Caption := 'Home';
+  //frmHome.BorderStyle := bsDialog;
+  frmHome.BorderIcons := [biSystemMenu];
+end;
+
+end.
