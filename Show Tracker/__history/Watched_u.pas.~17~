@@ -1,0 +1,91 @@
+unit Watched_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls;
+
+type
+  TfrmWatched = class(TForm)
+    redWatched: TRichEdit;
+    Button1: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+    shpHeader : TShape;
+    procedure InitializeForm;
+    procedure InitializeComponents;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmWatched: TfrmWatched;
+
+implementation
+
+uses Home_u;
+
+{$R *.dfm}
+
+{ TfrmWatched }
+
+procedure TfrmWatched.Button1Click(Sender: TObject);
+begin
+  frmWatched.Hide;
+  frmHome.Show;
+end;
+
+procedure TfrmWatched.FormCreate(Sender: TObject);
+begin
+  InitializeForm;
+  InitializeComponents;
+end;
+
+procedure TfrmWatched.InitializeComponents;
+begin
+  //redWatched initialization
+  redWatched.Clear;
+  redWatched.Top := trunc(0.05 * Screen.Height);
+  redWatched.Left := 0;
+  redWatched.Width := Screen.Width;
+  redWatched.Height := trunc(0.95 * Screen.Height);
+  redWatched.Color := rgb(0,0,0);
+  redWatched.ScrollBars := ssVertical;
+  redWatched.BorderStyle := bsNone;
+
+ {redWatched.BevelKind := bkNone;
+  redWatched.BevelInner := bvNone;
+  redWatched.BevelOuter := bvNone;
+  redWatched.BevelEdges := [];}
+end;
+
+procedure TfrmWatched.InitializeForm;
+begin
+  //form dimensions
+  frmWatched.Left := 0;
+  frmWatched.Top := 0;
+  frmWatched.Width := Screen.Width;
+  frmWatched.Height := Screen.Height;
+  frmWatched.Position := poScreenCenter;
+  frmWatched.WindowState := wsMaximized;
+  frmWatched.Caption := 'Home';
+  frmWatched.Color := rgb(0,0,0);
+
+  //remove border (therefore user cant resize or move the form)
+  frmWatched.BorderStyle := bsNone;
+
+  //dynamically create purple header
+  shpHeader := TShape.Create(frmWatched);
+  shpHeader.Parent := frmWatched;
+  shpHeader.Left := 0;
+  shpHeader.Top := 0;
+  shpHeader.Width := Screen.Width;
+  shpHeader.Height := Trunc(0.05 * screen.Width);
+  shpHeader.Brush.Color := rgb(82, 5, 123);
+  shpHeader.Pen.Color := rgb(82, 5, 123);
+end;
+
+end.
