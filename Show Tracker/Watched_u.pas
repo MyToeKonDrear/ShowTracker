@@ -52,7 +52,7 @@ begin
   redWatched.Left := 0;
   redWatched.Width := Screen.Width;
   redWatched.Height := Screen.Height;
-  redWatched.Color := rgb(0,0,0);
+  redWatched.Color := rgb(frmHome.arrBackgroundColor[1],frmHome.arrBackgroundColor[2],frmHome.arrBackgroundColor[3]);
   redWatched.ScrollBars := ssVertical;
   redWatched.HideScrollBars := false;
   redWatched.BorderStyle := bsNone;
@@ -68,7 +68,7 @@ begin
   frmWatched.Position := poScreenCenter;
   frmWatched.WindowState := wsMaximized;
   frmWatched.Caption := 'Home';
-  frmWatched.Color := rgb(0,0,0);
+  frmWatched.Color := rgb(frmHome.arrBackgroundColor[1],frmHome.arrBackgroundColor[2],frmHome.arrBackgroundColor[3]);
 
   //remove border (therefore user cant resize or move the form)
   frmWatched.BorderStyle := bsNone;
@@ -80,8 +80,8 @@ begin
   shpHeader.Top := 0;
   shpHeader.Width := Screen.Width;
   shpHeader.Height := Trunc(0.05 * screen.Width);
-  shpHeader.Brush.Color := rgb(82, 5, 123);
-  shpHeader.Pen.Color := rgb(82, 5, 123);
+  shpHeader.Brush.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+  shpHeader.Pen.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
 end;
 
 end.

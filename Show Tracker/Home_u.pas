@@ -17,6 +17,10 @@ type
     procedure InitializeForm;
   public
     { Public declarations }
+    arrBackgroundColor : array[1..3] of integer;
+    arrSecondaryColor : array[1..3] of integer;
+    arrTertiaryColor : array[1..3] of integer;
+    arrTextColor : array[1..3] of integer;
   end;
 
 var
@@ -24,7 +28,7 @@ var
 
 implementation
 
-uses Watched_u;
+uses Watched_u, AddWatched_u;
 
 {$R *.dfm}
 
@@ -33,11 +37,27 @@ uses Watched_u;
 procedure TfrmHome.Button1Click(Sender: TObject);
 begin
   frmHome.Hide;
-  frmWatched.Show;
+  frmAddWatched.Show;
 end;
 
 procedure TfrmHome.FormCreate(Sender: TObject);
 begin
+  //populate array colors
+  arrBackgroundcolor[1] := 0;
+  arrBackgroundcolor[2] := 0;
+  arrBackgroundcolor[3] := 0;
+
+  arrSecondaryColor[1] := 82;
+  arrSecondaryColor[2] := 5;
+  arrSecondaryColor[3] := 123;
+
+  arrTertiaryColor[1] := 137;
+  arrTertiaryColor[2] := 44;
+  arrTertiaryColor[3] := 220;
+
+  arrTextColor[1] := 255;
+  arrTextColor[2] := 255;
+  arrTextColor[3] := 255;
   InitializeForm;
 end;
 
@@ -51,7 +71,7 @@ begin
   frmHome.Position := poScreenCenter;
   frmHome.WindowState := wsMaximized;
   frmHome.Caption := 'Home';
-  frmHome.Color := rgb(0,0,0);
+  frmHome.Color := rgb(arrBackgroundcolor[1],arrBackgroundcolor[2],arrBackgroundcolor[3]);
 
   //remove border (therefore user cant resize or move the form)
   frmHome.BorderStyle := bsNone;
@@ -63,8 +83,8 @@ begin
   shpHeader.Top := 0;
   shpHeader.Width := Screen.Width;
   shpHeader.Height := Trunc(0.08 * screen.Height);
-  shpHeader.Brush.Color := rgb(82, 5, 123);
-  shpHeader.Pen.Color := rgb(82, 5, 123);
+  shpHeader.Brush.Color := rgb(arrSecondaryColor[1],arrSecondaryColor[2],arrSecondaryColor[3]);
+  shpHeader.Pen.Color := rgb(arrSecondaryColor[1],arrSecondaryColor[2],arrSecondaryColor[3]);
 end;
 
 end.

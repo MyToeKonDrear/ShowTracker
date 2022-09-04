@@ -1,0 +1,18 @@
+program ShowTracker_p;
+
+uses
+  Vcl.Forms,
+  Home_u in 'Home_u.pas' {frmHome},
+  Watched_u in 'Watched_u.pas' {frmWatched},
+  AddWatched_u in 'AddWatched_u.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmHome, frmHome);
+  Application.CreateForm(TfrmWatched, frmWatched);
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

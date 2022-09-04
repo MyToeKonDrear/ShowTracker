@@ -1,0 +1,47 @@
+object frmAddWatched: TfrmAddWatched
+  Left = 0
+  Top = 0
+  Caption = 'frmAddWatched'
+  ClientHeight = 792
+  ClientWidth = 1102
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblSeasons: TLabel
+    Left = 128
+    Top = 160
+    Width = 50
+    Height = 13
+    Caption = 'lblSeasons'
+  end
+  object edtShowName: TEdit
+    Left = 16
+    Top = 12
+    Width = 121
+    Height = 21
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    TabOrder = 0
+    Text = 'edtShowName'
+    OnMouseEnter = edtShowNameMouseEnter
+  end
+  object spnSeasons: TSpinEdit
+    Left = 16
+    Top = 56
+    Width = 121
+    Height = 22
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 1
+    Value = 0
+  end
+end

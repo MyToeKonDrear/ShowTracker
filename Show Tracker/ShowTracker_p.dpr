@@ -3,7 +3,8 @@ program ShowTracker_p;
 uses
   Vcl.Forms,
   Home_u in 'Home_u.pas' {frmHome},
-  Watched_u in 'Watched_u.pas' {frmWatched};
+  Watched_u in 'Watched_u.pas' {frmWatched},
+  AddWatched_u in 'AddWatched_u.pas' {frmAddWatched};
 
 {$R *.res}
 
@@ -12,5 +13,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmHome, frmHome);
   Application.CreateForm(TfrmWatched, frmWatched);
+  Application.CreateForm(TfrmAddWatched, frmAddWatched);
   Application.Run;
 end.
