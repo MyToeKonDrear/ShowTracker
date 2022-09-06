@@ -12,6 +12,7 @@ object frmWatched: TfrmWatched
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object redWatched: TRichEdit
@@ -33,14 +34,5 @@ object frmWatched: TfrmWatched
     ParentFont = False
     TabOrder = 0
     Zoom = 100
-  end
-  object Button1: TButton
-    Left = 296
-    Top = 248
-    Width = 113
-    Height = 33
-    Caption = 'Button1'
-    TabOrder = 1
-    OnClick = Button1Click
   end
 end

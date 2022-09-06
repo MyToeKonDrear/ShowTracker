@@ -16,8 +16,11 @@ type
     spnEpisodes: TSpinEdit;
     lblDateCompleted: TLabel;
     dpDateCompleted: TDatePicker;
+    pnlEnter: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure edtShowNameMouseEnter(Sender: TObject);
+    procedure pnlEnterMouseEnter(Sender: TObject);
+    procedure pnlEnterMouseLeave(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -82,6 +85,7 @@ begin
   spnSeasons.Font.Size := 16;
   spnSeasons.Font.color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   spnSeasons.Width := lblSeasons.Width;
+  spnSeasons.Height := Trunc(0.03 * Screen.Height);
   spnSeasons.Top := Trunc(0.34 * Screen.Height);
   spnSeasons.Left := Trunc(0.25 * Screen.Width);
   spnSeasons.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
@@ -100,6 +104,7 @@ begin
   spnEpisodes.Font.Size := 16;
   spnEpisodes.Font.color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   spnEpisodes.Width := lblSeasons.Width;
+  spnEpisodes.Height := Trunc(0.03 * Screen.Height);
   spnEpisodes.Top := Trunc(0.54 * Screen.Height);
   spnEpisodes.Left := Trunc(0.25 * Screen.Width);
   spnEpisodes.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
@@ -116,7 +121,7 @@ begin
   dpDateCompleted.Left := Trunc(0.25 * Screen.Width);
   dpDateCompleted.Top := Trunc(0.74 * Screen.Height);
   dpDateCompleted.Width := lblSeasons.Width;
-  dpDateCompleted.Height := edtShowName.Height;
+  dpDateCompleted.Height := Trunc(0.03 * Screen.Height);
   dpDateCompleted.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   dpDateCompleted.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   dpDateCompleted.Font.Size := 16;
@@ -127,6 +132,20 @@ begin
   dpDAteCompleted.HotColor :=  rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   dpDateCompleted.BorderStyle := bsNone;
   dpDateCompleted.DateFormat := 'dd/MMM/yyyy';
+
+  //pnlEnter
+  pnlEnter.Caption := 'Enter Show';
+  pnlEnter.ParentBackground := false;
+  pnlEnter.ParentColor := false;
+  pnlEnter.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  pnlEnter.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  pnlEnter.font.Size := 16;
+  pnlEnter.Top := Trunc(0.9 * Screen.Height);
+  pnlEnter.Width := lblSeasons.Width;
+  pnlEnter.Height := Trunc(0.03 * Screen.Height);
+  pnlEnter.Left := ((edtShowName.Width + edtShowName.left) - pnlEnter.Width);
+  pnlEnter.BorderStyle := bsNone;
+  pnlEnter.BevelOuter := bvNone;
 end;
 
 procedure TfrmAddWatched.InitializeForm;
@@ -153,6 +172,16 @@ begin
   shpHeader.Height := Trunc(0.05 * screen.Width);
   shpHeader.Brush.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
   shpHeader.Pen.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmAddWatched.pnlEnterMouseEnter(Sender: TObject);
+begin
+  pnlEnter.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmAddWatched.pnlEnterMouseLeave(Sender: TObject);
+begin
+  pnlEnter.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 end;
 
 end.

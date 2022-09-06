@@ -16,9 +16,33 @@ object frmHome: TfrmHome
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object imgExit: TImage
+    Left = 280
+    Top = 368
+    Width = 105
+    Height = 105
+  end
+  object imgHome: TImage
+    Left = 640
+    Top = 400
+    Width = 105
+    Height = 105
+  end
+  object imgLogo: TImage
+    Left = 456
+    Top = 384
+    Width = 105
+    Height = 105
+  end
+  object imgBryn: TImage
+    Left = 408
+    Top = 168
+    Width = 105
+    Height = 105
+  end
   object Button1: TButton
-    Left = 488
-    Top = 280
+    Left = 543
+    Top = 296
     Width = 75
     Height = 25
     Caption = 'Button1'

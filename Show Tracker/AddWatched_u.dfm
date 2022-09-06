@@ -63,6 +63,10 @@ object frmAddWatched: TfrmAddWatched
     Top = 264
     Width = 121
     Height = 22
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
     MaxValue = 0
     MinValue = 0
     TabOrder = 2
@@ -80,5 +84,15 @@ object frmAddWatched: TfrmAddWatched
     Font.Style = []
     StyleElements = []
     TabOrder = 3
+  end
+  object pnlEnter: TPanel
+    Left = 16
+    Top = 504
+    Width = 185
+    Height = 41
+    Caption = 'pnlEnter'
+    TabOrder = 4
+    OnMouseEnter = pnlEnterMouseEnter
+    OnMouseLeave = pnlEnterMouseLeave
   end
 end
