@@ -35,6 +35,36 @@ object frmAddWatched: TfrmAddWatched
     Height = 13
     Caption = 'lblDateCompleted'
   end
+  object imgHome: TImage
+    Left = 488
+    Top = 144
+    Width = 105
+    Height = 105
+    OnClick = imgHomeClick
+    OnMouseEnter = imgHomeMouseEnter
+    OnMouseLeave = imgHomeMouseLeave
+  end
+  object imgExit: TImage
+    Left = 712
+    Top = 181
+    Width = 105
+    Height = 105
+    OnClick = imgExitClick
+    OnMouseEnter = imgExitMouseEnter
+    OnMouseLeave = imgExitMouseLeave
+  end
+  object imgLogo: TImage
+    Left = 520
+    Top = 376
+    Width = 105
+    Height = 105
+  end
+  object imgBryn: TImage
+    Left = 528
+    Top = 384
+    Width = 105
+    Height = 105
+  end
   object edtShowName: TEdit
     Left = 16
     Top = 12

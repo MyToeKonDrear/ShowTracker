@@ -15,6 +15,36 @@ object frmWatched: TfrmWatched
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object imgBryn: TImage
+    Left = 344
+    Top = 200
+    Width = 105
+    Height = 105
+  end
+  object imgHome: TImage
+    Left = 352
+    Top = 208
+    Width = 105
+    Height = 105
+    OnClick = imgHomeClick
+    OnMouseEnter = imgHomeMouseEnter
+    OnMouseLeave = imgHomeMouseLeave
+  end
+  object imgExit: TImage
+    Left = 360
+    Top = 216
+    Width = 105
+    Height = 105
+    OnClick = imgExitClick
+    OnMouseEnter = imgExitMouseEnter
+    OnMouseLeave = imgExitMouseLeave
+  end
+  object imgLogo: TImage
+    Left = 368
+    Top = 224
+    Width = 105
+    Height = 105
+  end
   object redWatched: TRichEdit
     Left = -11
     Top = -11
@@ -34,5 +64,17 @@ object frmWatched: TfrmWatched
     ParentFont = False
     TabOrder = 0
     Zoom = 100
+  end
+  object stgWatched: TStringGrid
+    Left = 240
+    Top = 192
+    Width = 320
+    Height = 120
+    Color = clBlack
+    FixedColor = clBlack
+    GradientEndColor = clBlack
+    GradientStartColor = clBlack
+    TabOrder = 1
+    OnDrawCell = stgWatchedDrawCell
   end
 end

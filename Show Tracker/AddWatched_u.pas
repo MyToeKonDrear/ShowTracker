@@ -17,15 +17,26 @@ type
     lblDateCompleted: TLabel;
     dpDateCompleted: TDatePicker;
     pnlEnter: TPanel;
+    imgHome: TImage;
+    imgExit: TImage;
+    imgLogo: TImage;
+    imgBryn: TImage;
     procedure FormCreate(Sender: TObject);
     procedure edtShowNameMouseEnter(Sender: TObject);
     procedure pnlEnterMouseEnter(Sender: TObject);
     procedure pnlEnterMouseLeave(Sender: TObject);
+    procedure imgExitMouseEnter(Sender: TObject);
+    procedure imgExitMouseLeave(Sender: TObject);
+    procedure imgHomeMouseEnter(Sender: TObject);
+    procedure imgHomeMouseLeave(Sender: TObject);
+    procedure imgHomeClick(Sender: TObject);
+    procedure imgExitClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
     procedure InitializeForm;
     procedure InitializeComponents;
+    procedure InitializeImages;
   public
     { Public declarations }
   end;
@@ -52,6 +63,38 @@ procedure TfrmAddWatched.FormCreate(Sender: TObject);
 begin
   InitializeForm;
   InitializeComponents;
+  InitializeImages;
+end;
+
+procedure TfrmAddWatched.imgExitClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmAddWatched.imgExitMouseEnter(Sender: TObject);
+begin
+  imgExit.Picture.LoadFromFile('Images\ExitImage2.jpg');
+end;
+
+procedure TfrmAddWatched.imgExitMouseLeave(Sender: TObject);
+begin
+  imgExit.Picture.LoadFromFile('Images\ExitImage1.jpg');
+end;
+
+procedure TfrmAddWatched.imgHomeClick(Sender: TObject);
+begin
+  frmHome.Show;
+  frmAddWatched.Hide;
+end;
+
+procedure TfrmAddWatched.imgHomeMouseEnter(Sender: TObject);
+begin
+  imgHome.Picture.LoadFromFile('Images\HomeImage2.jpg');
+end;
+
+procedure TfrmAddWatched.imgHomeMouseLeave(Sender: TObject);
+begin
+  imgHome.Picture.LoadFromFile('Images\HomeImage1.jpg');
 end;
 
 procedure TfrmAddWatched.InitializeComponents;
@@ -169,9 +212,51 @@ begin
   shpHeader.Left := 0;
   shpHeader.Top := 0;
   shpHeader.Width := Screen.Width;
-  shpHeader.Height := Trunc(0.05 * screen.Width);
+  shpHeader.Height := Trunc(0.08 * screen.Height);
   shpHeader.Brush.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
   shpHeader.Pen.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmAddWatched.InitializeImages;
+begin
+  //logo
+  imgLogo.Width := Trunc(0.1 * Screen.Width);
+  imgLogo.Height := shpHeader.Height;
+  imglogo.Left := Trunc(0.02 * Screen.Width);
+  imgLogo.top := 0;
+  imgLogo.Proportional := true;
+  imgLogo.Picture.LoadFromFile('Images\LogoImage.jpg');
+  //imgLogo.Cursor := crHandPoint;
+  imgLogo.BringToFront;
+
+  //exit image
+  imgExit.Width := shpHeader.Height;
+  imgExit.Height := Trunc(0.8 * shpHeader.Height);
+  imgExit.Left := Screen.Width - imgExit.Width;
+  imgExit.top := Trunc(0.1 * shpHeader.Height);
+  imgExit.Proportional := true;
+  imgExit.Picture.LoadFromFile('Images\ExitImage1.jpg');
+  imgExit.Cursor := crHandPoint;
+  imgExit.BringToFront;
+
+  //Home image
+  imgHome.Width := shpHeader.Height;
+  imgHome.Height := Trunc(0.8 * shpHeader.Height);
+  imgHome.Left := imgExit.Left - imgHome.Width;
+  imgHome.top := Trunc(0.1 * shpHeader.Height);
+  imgHome.Proportional := true;
+  imgHome.Picture.LoadFromFile('Images\HomeImage1.jpg');
+  imgHome.Cursor := crHandPoint;
+  imgHome.BringToFront;
+
+  //Bryn Image
+  imgBryn.Width := Trunc(0.1 * Screen.Width);
+  imgBryn.Height := Trunc(0.95 * shpHeader.Height);
+  imgBryn.Left := Trunc(0.45 * Screen.Width);
+  imgBryn.top := 0;
+  imgBryn.Proportional := true;
+  imgBryn.Picture.LoadFromFile('Images\BrynImage.jpg');
+  imgBryn.BringToFront;
 end;
 
 procedure TfrmAddWatched.pnlEnterMouseEnter(Sender: TObject);

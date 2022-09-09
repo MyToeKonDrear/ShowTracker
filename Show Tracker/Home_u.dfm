@@ -21,12 +21,17 @@ object frmHome: TfrmHome
     Top = 368
     Width = 105
     Height = 105
+    OnClick = imgExitClick
+    OnMouseEnter = imgExitMouseEnter
+    OnMouseLeave = imgExitMouseLeave
   end
   object imgHome: TImage
     Left = 640
     Top = 400
     Width = 105
     Height = 105
+    OnMouseEnter = imgHomeMouseEnter
+    OnMouseLeave = imgHomeMouseLeave
   end
   object imgLogo: TImage
     Left = 456
