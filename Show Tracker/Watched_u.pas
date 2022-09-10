@@ -9,7 +9,6 @@ uses
 
 type
   TfrmWatched = class(TForm)
-    redWatched: TRichEdit;
     imgBryn: TImage;
     imgHome: TImage;
     imgExit: TImage;
@@ -35,7 +34,6 @@ type
     procedure PopulatestgWatched;
   public
     { Public declarations }
-    procedure LoadWatchedShows;
   end;
 
 var
@@ -64,7 +62,6 @@ end;
 
 procedure TfrmWatched.FormShow(Sender: TObject);
 begin
-  LoadWatchedShows;
   PopulatestgWatched;
 end;
 
@@ -101,26 +98,6 @@ end;
 
 procedure TfrmWatched.InitializeComponents;
 begin
-  //redWatched initialization
-  redWatched.Clear;
-  redWatched.Top := trunc(0.08 * Screen.Height);
-  redWatched.Left := 0;
-  redWatched.Width := Screen.Width;
-  redWatched.Height := (Screen.Height - shpHeader.Height);
-  redWatched.Color := rgb(frmHome.arrBackgroundColor[1],frmHome.arrBackgroundColor[2],frmHome.arrBackgroundColor[3]);
-  redWatched.font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
-  redWatched.Font.Size := 16;
-  redWatched.ScrollBars := ssVertical;
-  redWatched.HideScrollBars := false;
-  redWatched.BorderStyle := bsNone;
-  redWatched.ReadOnly := true;
-  redWatched.TabStop := false;
-  redWatched.Paragraph.TabCount := 3;
-  redWatched.Paragraph.Tab[0] := 50;
-  redWatched.Paragraph.Tab[1] := 700;
-  redWatched.Paragraph.Tab[2] := 750;
-  redWatched.Hide;
-
   //stgWatched
   stgWatched.Left := 0;
   stgWatched.Top := shpHeader.Height;
@@ -136,6 +113,7 @@ begin
   stgWatched.GridLineWidth := 0;
   //stgWatched.Canvas.Brush.Color := rgb(frmHome.arrBackgroundColor[1],frmHome.arrBackgroundColor[2],frmHome.arrBackgroundColor[3]);
   // stgWatched.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  stgWatched.DefaultDrawing := false;
 end;
 
 procedure TfrmWatched.InitializeForm;
@@ -206,29 +184,6 @@ begin
   imgBryn.BringToFront;
 end;
 
-procedure TfrmWatched.LoadWatchedShows;
-Var
-  i, iOrderWatched : integer;
-  sLine : string;
-begin
-  redWatched.Clear;
-
-  iOrderWatched := 1;
-  dmShowTracker.tblWatched.Open;
-  dmShowTracker.tblWatched.First;
-    repeat
-      sLine := '';
-      sline := #13 + IntToStr(iOrderWatched) + #9 + dmShowTracker.tblWatched['ShowName'] + #9;
-      inc(iOrderWatched);
-      dmShowTracker.tblWatched.Next;
-      sLine := sLine + IntToStr(iOrderWatched) + #9 + dmShowTracker.tblWatched['ShowName'];
-      inc(iOrderWatched);
-      dmShowTracker.tblWatched.Next;
-      redWatched.Lines.Add(sLine);
-    until (dmShowTracker.tblWatched.Eof);
-  dmShowTracker.tblWatched.Close;
-end;
-
 procedure TfrmWatched.PopulatestgWatched;
 Var
   iOrderWatched, iRow : integer;
@@ -270,6 +225,15 @@ begin
   stgWatched.Canvas.Font.Size := 16;
   stgWatched.Canvas.FillRect(Rect);
   stgWatched.Canvas.TextOut(Rect.Left,Rect.Top,stgWAtched.Cells[ACol,ARow]);
+
+  if (stgWatched.Col = aCol) AND (stgWatched.Row = aRow) AND (stgWatched.Col <> 0) AND (stgWatched.Col <> 2) then
+    with stgWatched do
+    begin
+      //paint the background Green
+      Canvas.Font.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+      Canvas.FillRect(Rect);
+      Canvas.TextOut(Rect.Left+2,Rect.Top+2,Cells[ACol, ARow]);
+    end;
 end;
 
 end.

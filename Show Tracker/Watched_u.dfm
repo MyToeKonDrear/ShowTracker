@@ -45,26 +45,6 @@ object frmWatched: TfrmWatched
     Width = 105
     Height = 105
   end
-  object redWatched: TRichEdit
-    Left = -11
-    Top = -11
-    Width = 785
-    Height = 473
-    BevelInner = bvNone
-    BevelOuter = bvNone
-    BorderStyle = bsNone
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    HideScrollBars = False
-    Lines.Strings = (
-      'redWatched')
-    ParentFont = False
-    TabOrder = 0
-    Zoom = 100
-  end
   object stgWatched: TStringGrid
     Left = 240
     Top = 192
@@ -74,7 +54,7 @@ object frmWatched: TfrmWatched
     FixedColor = clBlack
     GradientEndColor = clBlack
     GradientStartColor = clBlack
-    TabOrder = 1
+    TabOrder = 0
     OnDrawCell = stgWatchedDrawCell
   end
 end
