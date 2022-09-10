@@ -5,7 +5,8 @@ uses
   Home_u in 'Home_u.pas' {frmHome},
   Watched_u in 'Watched_u.pas' {frmWatched},
   AddWatched_u in 'AddWatched_u.pas' {frmAddWatched},
-  dmShowTracker_u in 'dmShowTracker_u.pas' {dmShowTracker: TDataModule};
+  dmShowTracker_u in 'dmShowTracker_u.pas' {dmShowTracker: TDataModule},
+  ShowDetails_u in 'ShowDetails_u.pas' {frmShowDetails};
 
 {$R *.res}
 
@@ -16,5 +17,6 @@ begin
   Application.CreateForm(TfrmWatched, frmWatched);
   Application.CreateForm(TfrmAddWatched, frmAddWatched);
   Application.CreateForm(TdmShowTracker, dmShowTracker);
+  Application.CreateForm(TfrmShowDetails, frmShowDetails);
   Application.Run;
 end.

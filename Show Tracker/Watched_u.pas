@@ -25,6 +25,7 @@ type
     procedure imgExitClick(Sender: TObject);
     procedure stgWatchedDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+    procedure stgWatchedDblClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -34,6 +35,7 @@ type
     procedure PopulatestgWatched;
   public
     { Public declarations }
+    iRecordNo : integer;
   end;
 
 var
@@ -41,7 +43,7 @@ var
 
 implementation
 
-uses Home_u, dmShowTracker_u;
+uses Home_u, dmShowTracker_u, ShowDetails_u;
 
 {$R *.dfm}
 
@@ -215,6 +217,19 @@ begin
     dmShowTRacker.tblWatched.Next;
   until (dmShowTracker.tblWatched.Eof);
   dmShowTracker.tblWatched.Close;
+end;
+
+procedure TfrmWatched.stgWatchedDblClick(Sender: TObject);
+begin
+  if (stgWatched.Col = 0) OR (stgWatched.Col = 2) then
+    EXIT;
+  iRecordNo := 0;
+  if stgWatched.Col = 1 then
+    iRecordNo := stgWatched.Row + 1  //plus one because database index(RecNo) starts from 1 not 0 like stringGrid
+  else iRecordNo := stgWatched.Row + 2;
+
+  frmWatched.Hide;
+  frmShowDetails.Show;
 end;
 
 procedure TfrmWatched.stgWatchedDrawCell(Sender: TObject; ACol, ARow: Integer;

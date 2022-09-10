@@ -55,6 +55,7 @@ object frmWatched: TfrmWatched
     GradientEndColor = clBlack
     GradientStartColor = clBlack
     TabOrder = 0
+    OnDblClick = stgWatchedDblClick
     OnDrawCell = stgWatchedDrawCell
   end
 end
