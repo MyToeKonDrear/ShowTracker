@@ -21,13 +21,6 @@ object frmAddWatched: TfrmAddWatched
     Height = 13
     Caption = 'lblSeasons'
   end
-  object lblEpisodes: TLabel
-    Left = 85
-    Top = 304
-    Width = 52
-    Height = 13
-    Caption = 'lblEpisodes'
-  end
   object lblDateCompleted: TLabel
     Left = 96
     Top = 424
@@ -88,20 +81,6 @@ object frmAddWatched: TfrmAddWatched
     TabOrder = 1
     Value = 0
   end
-  object spnEpisodes: TSpinEdit
-    Left = 16
-    Top = 264
-    Width = 121
-    Height = 22
-    Margins.Left = 0
-    Margins.Top = 0
-    Margins.Right = 0
-    Margins.Bottom = 0
-    MaxValue = 0
-    MinValue = 0
-    TabOrder = 2
-    Value = 0
-  end
   object dpDateCompleted: TDatePicker
     Left = 8
     Top = 376
@@ -113,7 +92,7 @@ object frmAddWatched: TfrmAddWatched
     Font.Name = 'Segoe UI'
     Font.Style = []
     StyleElements = []
-    TabOrder = 3
+    TabOrder = 2
   end
   object pnlEnter: TPanel
     Left = 16
@@ -121,7 +100,8 @@ object frmAddWatched: TfrmAddWatched
     Width = 185
     Height = 41
     Caption = 'pnlEnter'
-    TabOrder = 4
+    TabOrder = 3
+    OnClick = pnlEnterClick
     OnMouseEnter = pnlEnterMouseEnter
     OnMouseLeave = pnlEnterMouseLeave
   end

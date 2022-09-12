@@ -45,13 +45,31 @@ object frmHome: TfrmHome
     Width = 105
     Height = 105
   end
-  object Button1: TButton
-    Left = 543
-    Top = 296
+  object btnAddWatched: TButton
+    Left = 280
+    Top = 152
     Width = 75
     Height = 25
-    Caption = 'Button1'
+    Caption = 'btnAddWatched'
     TabOrder = 0
-    OnClick = Button1Click
+    OnClick = btnAddWatchedClick
+  end
+  object btnWatched: TButton
+    Left = 280
+    Top = 232
+    Width = 75
+    Height = 25
+    Caption = 'btnWatched'
+    TabOrder = 1
+    OnClick = btnWatchedClick
+  end
+  object btnDelete: TButton
+    Left = 280
+    Top = 280
+    Width = 75
+    Height = 25
+    Caption = 'btnDelete'
+    TabOrder = 2
+    OnClick = btnDeleteClick
   end
 end

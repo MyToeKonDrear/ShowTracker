@@ -32,10 +32,10 @@ type
     procedure InitializeForm;
     procedure InitializeComponents;
     procedure InitializeImages;
-    procedure PopulatestgWatched;
   public
     { Public declarations }
     iRecordNo : integer;
+    procedure PopulatestgWatched;
   end;
 
 var
@@ -210,6 +210,7 @@ begin
     stgWatched.Cells[1, iRow] := dmShowTracker.tblWatched['ShowName'];
     inc(iOrderWatched);
     dmShowTracker.tblWatched.Next;
+    if dmShowTracker.tblWatched.Eof = true then break;    
     stgWatched.Cells[2, iRow] := IntToStr(iOrderWatched);
     stgWatched.Cells[3, iRow] := dmShowTRacker.tblWatched['ShowName'];
     iRow := iRow + 2;
@@ -228,7 +229,7 @@ begin
     iRecordNo := stgWatched.Row + 1  //plus one because database index(RecNo) starts from 1 not 0 like stringGrid
   else iRecordNo := stgWatched.Row + 2;
 
-  frmWatched.Hide;
+  frmWatched.hide;
   frmShowDetails.Show;
 end;
 
@@ -245,7 +246,7 @@ begin
     with stgWatched do
     begin
       //paint the background Green
-      Canvas.Font.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+      Canvas.Font.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
       Canvas.FillRect(Rect);
       Canvas.TextOut(Rect.Left+2,Rect.Top+2,Cells[ACol, ARow]);
     end;

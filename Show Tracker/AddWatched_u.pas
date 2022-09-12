@@ -12,8 +12,6 @@ type
     edtShowName: TEdit;
     spnSeasons: TSpinEdit;
     lblSeasons: TLabel;
-    lblEpisodes: TLabel;
-    spnEpisodes: TSpinEdit;
     lblDateCompleted: TLabel;
     dpDateCompleted: TDatePicker;
     pnlEnter: TPanel;
@@ -31,12 +29,14 @@ type
     procedure imgHomeMouseLeave(Sender: TObject);
     procedure imgHomeClick(Sender: TObject);
     procedure imgExitClick(Sender: TObject);
+    procedure pnlEnterClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
     procedure InitializeForm;
     procedure InitializeComponents;
     procedure InitializeImages;
+    procedure ResetComponents;
   public
     { Public declarations }
   end;
@@ -46,7 +46,7 @@ var
 
 implementation
 
-uses Home_u;
+uses Home_u, dmShowTracker_u, Watched_u;
 
 {$R *.dfm}
 
@@ -109,7 +109,7 @@ begin
   edtShowName.Width := Trunc(0.5 * Screen.Width);
   edtShowName.Height := Trunc(0.03 * Screen.Height);
   edtShowName.Left := Trunc(0.25 * Screen.Width);
-  edtSHowName.Top := Trunc(0.15 * screen.Height);
+  edtSHowName.Top := Trunc(0.2 * screen.Height);
   edtShowName.Alignment := taLeftJustify;
   edtShowName.Cursor := crIBeam;
   edtShowName.TabOrder := 0;
@@ -119,7 +119,7 @@ begin
   lblSeasons.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   lblSeasons.Font.Size := 16;
   lblSeasons.Left := Trunc(0.25 * Screen.width);
-  lblSeasons.Top := Trunc(0.3 * Screen.Height);
+  lblSeasons.Top := Trunc(0.38 * Screen.Height);
 
   //spnSeasons
   spnSeasons.Value := 0;
@@ -129,40 +129,21 @@ begin
   spnSeasons.Font.color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   spnSeasons.Width := lblSeasons.Width;
   spnSeasons.Height := Trunc(0.03 * Screen.Height);
-  spnSeasons.Top := Trunc(0.34 * Screen.Height);
+  spnSeasons.Top := Trunc(0.42 * Screen.Height);
   spnSeasons.Left := Trunc(0.25 * Screen.Width);
   spnSeasons.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
-
-  //lblEpisodes
-  lblEpisodes.Caption := 'How many episodes did you watch? Leave at 0 if you completed the season';
-  lblEpisodes.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
-  lblEpisodes.Font.Size := 16;
-  lblEpisodes.Left := Trunc(0.25 * Screen.width);
-  lblEpisodes.Top := Trunc(0.5 * Screen.Height);
-
-  //spnEpisodes
-  spnEpisodes.Value := 0;
-  spnEpisodes.MinValue := 0;
-  spnEpisodes.MaxValue := 100;
-  spnEpisodes.Font.Size := 16;
-  spnEpisodes.Font.color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
-  spnEpisodes.Width := lblSeasons.Width;
-  spnEpisodes.Height := Trunc(0.03 * Screen.Height);
-  spnEpisodes.Top := Trunc(0.54 * Screen.Height);
-  spnEpisodes.Left := Trunc(0.25 * Screen.Width);
-  spnEpisodes.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 
   //lblDateCompleted
   lblDateCompleted.Caption := 'What date did you complete the show on?';
   lblDateCompleted.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   lblDateCompleted.Font.Size := 16;
   lblDateCompleted.Left := Trunc(0.25 * Screen.width);
-  lblDateCompleted.Top := Trunc(0.7 * Screen.Height);
+  lblDateCompleted.Top := Trunc(0.6 * Screen.Height);
 
   //dpDateCompleted
   dpDateCompleted.Date := Date;
   dpDateCompleted.Left := Trunc(0.25 * Screen.Width);
-  dpDateCompleted.Top := Trunc(0.74 * Screen.Height);
+  dpDateCompleted.Top := Trunc(0.64 * Screen.Height);
   dpDateCompleted.Width := lblSeasons.Width;
   dpDateCompleted.Height := Trunc(0.03 * Screen.Height);
   dpDateCompleted.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
@@ -183,7 +164,7 @@ begin
   pnlEnter.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   pnlEnter.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlEnter.font.Size := 16;
-  pnlEnter.Top := Trunc(0.9 * Screen.Height);
+  pnlEnter.Top := Trunc(0.8 * Screen.Height);
   pnlEnter.Width := lblSeasons.Width;
   pnlEnter.Height := Trunc(0.03 * Screen.Height);
   pnlEnter.Left := ((edtShowName.Width + edtShowName.left) - pnlEnter.Width);
@@ -259,6 +240,49 @@ begin
   imgBryn.BringToFront;
 end;
 
+procedure TfrmAddWatched.pnlEnterClick(Sender: TObject);
+begin
+  //Validation
+  if edtShowName.Text = '' then
+  begin
+    MessageDLG('Please enter a name for the show',mtError,[mbOK],0);
+    EXIT;
+  end;
+
+  if (spnSeasons.Value = 0) OR (spnSeasons.Value < 0) then
+  begin
+    MessageDLG('Please enter a value for the number of seasons watched',mtError,[mbOK],0);
+    spnSeasons.SetFocus;
+    EXIT;
+  end;
+
+  //confirm
+  if MessageDLG('Are you sure you want to enter this show?',mtConfirmation,[mbYES,mbNO],0) = mrNo then
+  begin
+    MessageDLG(edtShowName.text + ' was not saved',mtInformation,[mbOK],0);
+    ResetComponents;
+    EXIT;
+  end;
+
+  //enter show into database
+
+  with dmShowTracker do
+  begin
+    qryShowTracker.SQL.Clear;
+    qryShowTracker.SQL.Add('INSERT INTO Watched (ShowName, TimesWatched, Seasons, DateCompleted) VALUES (' +
+                           QuotedStr(edtShowName.Text) + ', ' + IntToStr(1) + ', ' + IntToStr(spnSeasons.Value) +
+                           ', #' + DateToStr(dpDateCompleted.Date) + '#)');
+    qryShowTracker.ExecSQL;
+  end;
+
+  //FeedBack
+  MessageDLG(edtShowName.Text + ' has been successfully saved',mtInformation,[mbOK],0);
+  ResetComponents;
+
+  frmAddWatched.Hide;
+  frmHome.Show;
+end;
+
 procedure TfrmAddWatched.pnlEnterMouseEnter(Sender: TObject);
 begin
   pnlEnter.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
@@ -267,6 +291,15 @@ end;
 procedure TfrmAddWatched.pnlEnterMouseLeave(Sender: TObject);
 begin
   pnlEnter.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+end;
+
+procedure TfrmAddWatched.ResetComponents;
+begin
+  edtShowName.Clear;
+  edtShowName.Text := 'Enter the name of the show';
+  spnSeasons.Value := 0;
+  dpDateCompleted.Date := date;
+  edtShowName.SetFocus;
 end;
 
 end.

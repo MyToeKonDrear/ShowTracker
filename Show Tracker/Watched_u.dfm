@@ -46,8 +46,8 @@ object frmWatched: TfrmWatched
     Height = 105
   end
   object stgWatched: TStringGrid
-    Left = 240
-    Top = 192
+    Left = 224
+    Top = 128
     Width = 320
     Height = 120
     Color = clBlack

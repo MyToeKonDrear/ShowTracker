@@ -13,8 +13,13 @@ type
     lblTimesWatched: TLabel;
     bvlDetailsBorder: TBevel;
     pnlEdit: TPanel;
+    lblDateCompleted: TLabel;
+    lblSeasons2: TLabel;
+    lblDateCompleted2: TLabel;
+    lblTimesWatched2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure pnlEditClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -30,7 +35,7 @@ var
 
 implementation
 
-uses Home_u, Watched_u, dmShowTracker_u;
+uses Home_u, Watched_u, dmShowTracker_u, Edit_u;
 
 {$R *.dfm}
 
@@ -58,23 +63,44 @@ begin
   //lblShowName
   lblShowName.Left := Trunc(0.25 * Screen.Width);
   lblShowName.Top := Trunc(0.1 * Screen.Height);
-  lblShowName.Font.Size := 16;
-  lblShowName.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
-  lblShowName.Caption := 'Default caption as;dlkalsdka;sdkasdlkjasdkljahsdjkashdajksdasd';
+  lblShowName.Font.Size := 24;
+  lblShowName.Font.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 
   //lblSeasons
   lblSeasons.Left := Trunc(0.25 * Screen.Width);
   lblSeasons.top := Trunc(0.2 * Screen.Height);
   lblSeasons.Font.Size := 16;
   lblSeasons.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
-  lblSeasons.Caption := 'Seasons and episodes watched go here';
+
+  //lblSeasons2
+  lblSeasons2.Left := Trunc(0.55 * Screen.Width);
+  lblSeasons2.top := Trunc(0.2 * Screen.Height);
+  lblSeasons2.Font.Size := 16;
+  lblSeasons2.Font.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 
   //lblTimesWatched
   lblTimesWatched.Left := Trunc(0.25 * Screen.Width);
   lblTimesWatched.top := Trunc(0.3 * Screen.Height);
   lblTimesWatched.Font.Size := 16;
   lblTimesWatched.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
-  lblTimesWatched.Caption := 'Number of times the show has been watched goes ' + #13 + 'here';
+
+  //lblTimesWatched2
+  lblTimesWatched2.Left := Trunc(0.55 * Screen.Width);
+  lblTimesWatched2.top := Trunc(0.3 * Screen.Height);
+  lblTimesWatched2.Font.Size := 16;
+  lblTimesWatched2.Font.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+
+  //lblDateCompleted
+  lblDateCompleted.Left := Trunc(0.25 * Screen.Width);
+  lblDateCompleted.top := Trunc(0.4 * Screen.Height);
+  lblDateCompleted.Font.Size := 16;
+  lblDateCompleted.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+
+  //lblDateCompleted2
+  lblDateCompleted2.Left := Trunc(0.55 * Screen.Width);
+  lblDateCompleted2.top := Trunc(0.4 * Screen.Height);
+  lblDateCompleted2.Font.Size := 16;
+  lblDateCompleted2.Font.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 
   //pnlEdit
   pnlEdit.Caption := 'Edit Show';
@@ -123,11 +149,23 @@ begin
   dmShowTracker.tblWatched.RecNo := frmWatched.iRecordNo;
 
   lblShowName.Caption := dmShowTracker.tblWatched['ShowName'];
-  lblSeasons.Caption := 'Seasons Watched: ' + #9 + IntToStr(dmShowTracker.tblWatched['Seasons']) + #13 +
-                        'Episodes Watched: ' + #9 + IntToStr(dmShowTracker.tblWatched['Seasons']);
-  lblTimesWatched.Caption := 'Number of times you have watched the show: ' + #9 + IntToStr(dmShowTracker.tblWatched['TimesWatched']);
+
+  lblTimesWatched.Caption := 'Number of times you have watched the show: ';
+  lblTimesWatched2.Caption := IntToStr(dmShowTracker.tblWatched['TimesWatched']);
+
+  lblSeasons.Caption := 'Seasons Watched: ';
+  lblSeasons2.Caption := IntToStr(dmShowTracker.tblWatched['Seasons']);
+
+  lblDateCompleted.Caption := 'You completed this show on: ';
+  lblDateCompleted2.Caption := DateToStr(dmShowTracker.tblWatched['DateCompleted']);
 
   dmShowTracker.tblWatched.Close;
+end;
+
+procedure TfrmShowDetails.pnlEditClick(Sender: TObject);
+begin
+  frmShowDetails.Hide;
+  frmEdit.Show;
 end;
 
 end.

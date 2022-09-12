@@ -8,18 +8,22 @@ uses
 
 type
   TfrmHome = class(TForm)
-    Button1: TButton;
+    btnAddWatched: TButton;
     imgExit: TImage;
     imgHome: TImage;
     imgLogo: TImage;
     imgBryn: TImage;
+    btnWatched: TButton;
+    btnDelete: TButton;
     procedure FormCreate(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btnAddWatchedClick(Sender: TObject);
     procedure imgHomeMouseEnter(Sender: TObject);
     procedure imgHomeMouseLeave(Sender: TObject);
     procedure imgExitMouseEnter(Sender: TObject);
     procedure imgExitMouseLeave(Sender: TObject);
     procedure imgExitClick(Sender: TObject);
+    procedure btnWatchedClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -38,16 +42,30 @@ var
 
 implementation
 
-uses Watched_u, AddWatched_u;
+uses Watched_u, AddWatched_u, Edit_u, Delete_u;
 
 {$R *.dfm}
 
 { TfrmHome }
 
-procedure TfrmHome.Button1Click(Sender: TObject);
+procedure TfrmHome.btnAddWatchedClick(Sender: TObject);
 begin
   frmHome.Hide;
-  //frmAddWatched.Show;
+  frmAddWatched.Show;
+  //frmWatched.Show;
+  //frmDelete.Show;
+end;
+
+procedure TfrmHome.btnDeleteClick(Sender: TObject);
+begin
+  frmHome.Hide;
+  frmDelete.Show;
+end;
+
+procedure TfrmHome.btnWatchedClick(Sender: TObject);
+begin
+  frmHome.Hide;
+  frmWatched.PopulatestgWatched;  //updates frmWatched after deleting and opening frmWatched again #trust
   frmWatched.Show;
 end;
 

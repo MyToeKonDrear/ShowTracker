@@ -20,6 +20,7 @@ object frmShowDetails: TfrmShowDetails
     Top = 160
     Width = 63
     Height = 13
+    Alignment = taCenter
     Caption = 'lblShowName'
   end
   object lblSeasons: TLabel
@@ -42,6 +43,34 @@ object frmShowDetails: TfrmShowDetails
     Width = 50
     Height = 50
   end
+  object lblDateCompleted: TLabel
+    Left = 336
+    Top = 184
+    Width = 84
+    Height = 13
+    Caption = 'lblDateCompleted'
+  end
+  object lblSeasons2: TLabel
+    Left = 344
+    Top = 192
+    Width = 56
+    Height = 13
+    Caption = 'lblSeasons2'
+  end
+  object lblDateCompleted2: TLabel
+    Left = 352
+    Top = 200
+    Width = 90
+    Height = 13
+    Caption = 'lblDateCompleted2'
+  end
+  object lblTimesWatched2: TLabel
+    Left = 360
+    Top = 208
+    Width = 86
+    Height = 13
+    Caption = 'lblTimesWatched2'
+  end
   object pnlEdit: TPanel
     Left = 128
     Top = 97
@@ -49,5 +78,6 @@ object frmShowDetails: TfrmShowDetails
     Height = 41
     Caption = 'pnlEdit'
     TabOrder = 0
+    OnClick = pnlEditClick
   end
 end
