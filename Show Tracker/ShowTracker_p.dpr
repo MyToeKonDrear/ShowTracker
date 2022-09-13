@@ -8,7 +8,8 @@ uses
   dmShowTracker_u in 'dmShowTracker_u.pas' {dmShowTracker: TDataModule},
   ShowDetails_u in 'ShowDetails_u.pas' {frmShowDetails},
   Edit_u in 'Edit_u.pas' {frmEdit},
-  Delete_u in 'Delete_u.pas' {frmDelete};
+  Delete_u in 'Delete_u.pas' {frmDelete},
+  AddSeason_u in 'AddSeason_u.pas' {frmAddSeason};
 
 {$R *.res}
 
@@ -22,5 +23,6 @@ begin
   Application.CreateForm(TfrmShowDetails, frmShowDetails);
   Application.CreateForm(TfrmEdit, frmEdit);
   Application.CreateForm(TfrmDelete, frmDelete);
+  Application.CreateForm(TfrmAddSeason, frmAddSeason);
   Application.Run;
 end.

@@ -199,7 +199,7 @@ begin
   stgWatched.ColWidths[0] := Trunc(0.05 * Screen.Width);
   stgWatched.ColWidths[1] := Trunc(0.45 * Screen.Width);
   stgWatched.ColWidths[2] := Trunc(0.05 * Screen.Width);
-  stgWatched.ColWidths[3] := Trunc(0.44 * Screen.Width);
+  stgWatched.ColWidths[3] := Trunc(0.44 * Screen.Width); //not 45% because then grid shifts to the right when column 3 names are selected
 
   dmShowTracker.tblWatched.Open;
   dmShowTracker.tblWatched.First;
@@ -218,6 +218,8 @@ begin
     dmShowTRacker.tblWatched.Next;
   until (dmShowTracker.tblWatched.Eof);
   dmShowTracker.tblWatched.Close;
+
+  stgWatched.Row := stgwatched.VisibleRowCount - 1;
 end;
 
 procedure TfrmWatched.stgWatchedDblClick(Sender: TObject);

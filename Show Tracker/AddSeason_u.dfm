@@ -1,0 +1,50 @@
+object frmAddSeason: TfrmAddSeason
+  Left = 0
+  Top = 0
+  Caption = 'frmAddSeason'
+  ClientHeight = 299
+  ClientWidth = 635
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblName: TLabel
+    Left = 264
+    Top = 32
+    Width = 37
+    Height = 13
+    Caption = 'lblName'
+  end
+  object lblSeasons: TLabel
+    Left = 274
+    Top = 136
+    Width = 50
+    Height = 13
+    Caption = 'lblSeasons'
+  end
+  object spnSeasons: TSpinEdit
+    Left = 184
+    Top = 192
+    Width = 121
+    Height = 22
+    MaxValue = 0
+    MinValue = 0
+    TabOrder = 0
+    Value = 0
+  end
+  object pnlEnter: TPanel
+    Left = 264
+    Top = 240
+    Width = 185
+    Height = 41
+    Caption = 'pnlEnter'
+    TabOrder = 1
+  end
+end

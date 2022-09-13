@@ -80,4 +80,13 @@ object frmShowDetails: TfrmShowDetails
     TabOrder = 0
     OnClick = pnlEditClick
   end
+  object pnlAddSeason: TPanel
+    Left = 104
+    Top = 186
+    Width = 185
+    Height = 41
+    Caption = 'pnlAddSeason'
+    TabOrder = 1
+    OnClick = pnlAddSeasonClick
+  end
 end

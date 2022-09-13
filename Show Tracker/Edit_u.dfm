@@ -29,12 +29,12 @@ object frmEdit: TfrmEdit
     Height = 13
     Caption = 'lblSeasons'
   end
-  object lblChoice: TLabel
-    Left = 312
-    Top = 160
-    Width = 42
+  object lblDate: TLabel
+    Left = 320
+    Top = 168
+    Width = 33
     Height = 13
-    Caption = 'lblChoice'
+    Caption = 'lblDate'
   end
   object edtShowName: TEdit
     Left = 8
@@ -71,23 +71,18 @@ object frmEdit: TfrmEdit
     Height = 41
     Caption = 'pnlEnter'
     TabOrder = 3
+    OnClick = pnlEnterClick
   end
-  object pnlSeasons: TPanel
-    Left = 232
-    Top = 153
-    Width = 185
-    Height = 41
-    Caption = 'pnlSeasons'
+  object dtpDate: TDatePicker
+    Left = 464
+    Top = 180
+    Date = 44817.000000000000000000
+    DateFormat = 'yyyy/MM/dd'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
     TabOrder = 4
-    OnClick = pnlSeasonsClick
-  end
-  object pnlTimesWatched: TPanel
-    Left = 312
-    Top = 74
-    Width = 185
-    Height = 41
-    Caption = 'pnlTimesWatched'
-    TabOrder = 5
-    OnClick = pnlTimesWatchedClick
   end
 end

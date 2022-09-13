@@ -17,9 +17,11 @@ type
     lblSeasons2: TLabel;
     lblDateCompleted2: TLabel;
     lblTimesWatched2: TLabel;
+    pnlAddSeason: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure pnlEditClick(Sender: TObject);
+    procedure pnlAddSeasonClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -35,7 +37,7 @@ var
 
 implementation
 
-uses Home_u, Watched_u, dmShowTracker_u, Edit_u;
+uses Home_u, Watched_u, dmShowTracker_u, Edit_u, AddSeason_u;
 
 {$R *.dfm}
 
@@ -110,11 +112,25 @@ begin
   pnlEdit.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlEdit.font.Size := 16;
   pnlEdit.Top := Trunc(0.9 * Screen.Height);
-  pnlEdit.Width := Trunc(0.3 * Screen.Width);
+  pnlEdit.Width := Trunc(0.29 * Screen.Width);
   pnlEdit.Height := Trunc(0.03 * Screen.Height);
-  pnlEdit.Left := Trunc(0.5 * Screen.Width);
+  pnlEdit.Left := Trunc(0.51 * Screen.Width);
   pnlEdit.BorderStyle := bsNone;
   pnlEdit.BevelOuter := bvNone;
+
+  //pnlAddSeason
+  pnlAddSeason.Caption := 'Add New Seasons Watched';
+  pnlAddSeason.ParentBackground := false;
+  pnlAddSeason.ParentColor := false;
+  pnlAddSeason.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  pnlAddSeason.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  pnlAddSeason.font.Size := 16;
+  pnlAddSeason.Top := Trunc(0.9 * Screen.Height);
+  pnlAddSeason.Width := Trunc(0.29 * Screen.Width);
+  pnlAddSeason.Height := Trunc(0.03 * Screen.Height);
+  pnlAddSeason.Left := Trunc(0.2 * Screen.Width);
+  pnlAddSeason.BorderStyle := bsNone;
+  pnlAddSeason.BevelOuter := bvNone;
 end;
 
 procedure TfrmShowDetails.InitializeForm;
@@ -160,6 +176,12 @@ begin
   lblDateCompleted2.Caption := DateToStr(dmShowTracker.tblWatched['DateCompleted']);
 
   dmShowTracker.tblWatched.Close;
+end;
+
+procedure TfrmShowDetails.pnlAddSeasonClick(Sender: TObject);
+begin
+  frmShowDetails.Hide;
+  frmAddSeason.show;
 end;
 
 procedure TfrmShowDetails.pnlEditClick(Sender: TObject);
