@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.Samples.Spin;
+  Vcl.Samples.Spin, Vcl.WinXPickers;
 
 type
   TfrmAddSeason = class(TForm)
@@ -13,8 +13,11 @@ type
     lblSeasons: TLabel;
     spnSeasons: TSpinEdit;
     pnlEnter: TPanel;
+    dtpDate: TDatePicker;
+    lblDate: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure pnlEnterClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -49,6 +52,7 @@ begin
 
   lblName.Caption := dmShowTracker.tblWatched['ShowName'];
   spnSeasons.Value := dmShowTracker.tblWatched['Seasons'];
+  dtpDate.Date := dmShowTracker.tblWatched['DateCompleted'];
 
   dmShowTracker.tblWatched.Close;
 end;
@@ -79,6 +83,29 @@ begin
   spnSeasons.Top := Trunc(0.35 * Screen.Height);
   spnSeasons.Left := Trunc(0.25 * Screen.Width);
   spnSeasons.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+
+  //lblDate
+  lblDate.Left := Trunc(0.25 * Screen.Width);
+  lblDate.Top := Trunc(0.5 * Screen.Height);
+  lblDate.Font.Size := 16;
+  lblDate.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  lblDate.Caption := 'Enter the date you completed the new seasons on';
+
+  //dtpDate
+  dtpDate.Left := Trunc(0.25 * Screen.Width);
+  dtpDate.Top := Trunc(0.55 * Screen.Height);
+  dtpDate.Width := Trunc(0.25 * Screen.Width);
+  dtpDate.Height := Trunc(0.03 * Screen.Height);
+  dtpDate.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  dtpDate.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  dtpDate.Font.Size := 16;
+  dtpDate.SelectionColor := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  dtpDate.SelectionFontColor := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+  dtpDate.PopupColor := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  dtpDate.HighlightColor := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+  dtpDate.HotColor :=  rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  dtpDate.BorderStyle := bsNone;
+  dtpDate.DateFormat := 'dd/MMM/yyyy';
 
   //pnlEnter
   pnlEnter.Caption := 'Enter';
@@ -119,6 +146,73 @@ begin
   shpHeader.Height := Trunc(0.08 * screen.Height);
   shpHeader.Brush.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
   shpHeader.Pen.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3])
+end;
+
+procedure TfrmAddSeason.pnlEnterClick(Sender: TObject);
+var
+  iSeasons, iNoNewSeasons, iPrimaryKey, iOldSeasons : integer;
+  DateCompleted : TDate;
+begin
+  iSeasons := spnSeasons.Value;
+  DateCompleted := dtpDate.Date;
+
+  //validation
+  if (iSeasons <= 0) OR (iSeasons = 1) then
+  begin
+    MessageDLG('Invalid number of seasons entered',mtError,[mbOK],0);
+    spnSeasons.SetFocus;
+    EXIT;
+  end;
+
+  dmShowTracker.tblWatched.Open;
+  dmShowTracker.tblWatched.RecNo := frmWatched.iRecordNo;
+
+  if DateCompleted < dmShowTracker.tblWatched['DateCompleted'] then
+  begin
+    MessageDLG('New seasons date cannot be before earlier seasons date',mtError,[mbOK],0);
+    EXIT;
+  end;
+
+  //calculate amount of seasons watched
+  iNoNewSeasons := iSeasons - dmShowTracker.tblWatched['Seasons'];
+  iPrimaryKey := dmShowTracker.tblWatched['ID'];
+  iOldSeasons := dmShowTracker.tblWatched['Seasons'];
+
+  dmShowTracker.tblWatched.Close;
+
+  //confirm
+  if MessageDLG('Are you sure you want to add new seasons?' ,mtConfirmation,[mbYES,mbNO],0) = mrNO then
+  begin
+    MessageDLG('New seasons have not been added',mtInformation,[mbOK],0);
+    EXIT;
+  end;
+
+  //write into database
+  with dmShowTracker do
+  begin
+    qryShowTracker.SQL.Clear;
+    qryShowTracker.SQL.Add('INSERT INTO NewSeasons (ID, Seasons, DateCompleted, OldSeasons) ' +
+                           'VALUES (' + IntToStr(iPrimaryKey) + ', ' +
+                           intToStr(iNoNewSeasons) + ', #' +
+                           DateToStr(DateCompleted) + '#, ' +
+                           IntToStr(iOldSeasons) + ')');
+    qryShowTracker.ExecSQL;
+  end;
+
+  //update watched database
+  with dmShowTracker do
+  begin
+    qryShowTracker.SQL.Clear;
+    qryShowTracker.SQL.Add('UPDATE Watched SET Seasons = ' + IntToStr(iSeasons) +
+                           ' WHERE ID = ' + IntToStr(iPrimaryKey));
+    qryShowTracker.ExecSQL;
+  end;
+
+  //feedback
+  MessageDLG('New Seasons have been successfully saved',mtInformation,[mbOK],0);
+
+  frmAddSeason.Hide;
+  frmHome.Show;
 end;
 
 end.

@@ -77,30 +77,9 @@ begin
   edtShowName.Cursor := crIBeam;
   edtShowName.TabOrder := 0;
 
-  //lblTimesWatched
-  lblTimesWatched.Left := Trunc(0.25 * Screen.Width);
-  lblTimesWatched.top := Trunc(0.3 * Screen.Height);
-  lblTimesWatched.Caption := 'Number of Times Watched';
-  lblTimesWatched.Font.Size := 16;
-  lblTimesWatched.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
-  //lblTimesWAtched.Hide;
-
-  //spnTimesWatched
-  spnTimesWatched.Value := 0;
-  spnTimesWatched.MinValue := 0;
-  spnTimesWatched.MaxValue := 100;
-  spnTimesWatched.Font.Size := 16;
-  spnTimesWatched.Font.color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
-  spnTimesWatched.Width := Trunc(0.25 * SCreen.Width);
-  spnTimesWatched.Height := Trunc(0.03 * Screen.Height);
-  spnTimesWatched.Top := Trunc(0.35 * Screen.Height);
-  spnTimesWatched.Left := Trunc(0.25 * Screen.Width);
-  spnTimesWatched.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
-  //spnTimesWatched.Hide;
-
   //lblSeasons
   lblSeasons.Left := Trunc(0.25 * Screen.Width);
-  lblSeasons.top := Trunc(0.5 * Screen.Height);
+  lblSeasons.top := Trunc(0.3 * Screen.Height);
   lblSeasons.Caption := 'Seasons Completed';
   lblSeasons.Font.Size := 16;
   lblSeasons.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
@@ -114,10 +93,31 @@ begin
   spnSeasons.Font.color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   spnSeasons.Width := Trunc(0.25 * Screen.Width);
   spnSeasons.Height := Trunc(0.03 * Screen.Height);
-  spnSeasons.Top := Trunc(0.55 * Screen.Height);
+  spnSeasons.Top := Trunc(0.35 * Screen.Height);
   spnSeasons.Left := Trunc(0.25 * Screen.Width);
   spnSeasons.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   //spnSeasons.hide;
+
+  //lblTimesWatched
+  lblTimesWatched.Left := Trunc(0.25 * Screen.Width);
+  lblTimesWatched.top := Trunc(0.5 * Screen.Height);
+  lblTimesWatched.Caption := 'Number of Times Watched';
+  lblTimesWatched.Font.Size := 16;
+  lblTimesWatched.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  //lblTimesWAtched.Hide;
+
+  //spnTimesWatched
+  spnTimesWatched.Value := 0;
+  spnTimesWatched.MinValue := 0;
+  spnTimesWatched.MaxValue := 100;
+  spnTimesWatched.Font.Size := 16;
+  spnTimesWatched.Font.color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  spnTimesWatched.Width := Trunc(0.25 * SCreen.Width);
+  spnTimesWatched.Height := Trunc(0.03 * Screen.Height);
+  spnTimesWatched.Top := Trunc(0.55 * Screen.Height);
+  spnTimesWatched.Left := Trunc(0.25 * Screen.Width);
+  spnTimesWatched.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  //spnTimesWatched.Hide;
 
   //lblDate
   lblDate.Left := Trunc(0.25 * Screen.Width);

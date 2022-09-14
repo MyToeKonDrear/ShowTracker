@@ -29,6 +29,13 @@ object frmAddSeason: TfrmAddSeason
     Height = 13
     Caption = 'lblSeasons'
   end
+  object lblDate: TLabel
+    Left = 312
+    Top = 160
+    Width = 33
+    Height = 13
+    Caption = 'lblDate'
+  end
   object spnSeasons: TSpinEdit
     Left = 184
     Top = 192
@@ -46,5 +53,18 @@ object frmAddSeason: TfrmAddSeason
     Height = 41
     Caption = 'pnlEnter'
     TabOrder = 1
+    OnClick = pnlEnterClick
+  end
+  object dtpDate: TDatePicker
+    Left = 400
+    Top = 117
+    Date = 44818.000000000000000000
+    DateFormat = 'yyyy/MM/dd'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    TabOrder = 2
   end
 end

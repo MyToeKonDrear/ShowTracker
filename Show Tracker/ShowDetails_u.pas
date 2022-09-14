@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls;
 
 type
   TfrmShowDetails = class(TForm)
@@ -18,6 +18,7 @@ type
     lblDateCompleted2: TLabel;
     lblTimesWatched2: TLabel;
     pnlAddSeason: TPanel;
+    redSeasons: TRichEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure pnlEditClick(Sender: TObject);
@@ -131,6 +132,20 @@ begin
   pnlAddSeason.Left := Trunc(0.2 * Screen.Width);
   pnlAddSeason.BorderStyle := bsNone;
   pnlAddSeason.BevelOuter := bvNone;
+
+  //redSeasons
+  redSeasons.Clear;
+  redSeasons.Left := Trunc(0.25 * Screen.Width);
+  redSeasons.Top := Trunc(0.5 * Screen.Height);
+  redSeasons.Height := Trunc(0.25 * Screen.Height);
+  redSeasons.Width := Trunc(0.5 * Screen.Width);
+  redSeasons.BorderStyle := bsNone;
+  redSeasons.Color := rgb(frmHome.arrBackgroundcolor[1],frmHome.arrBackgroundcolor[2],frmHome.arrBackgroundcolor[3]);
+  redSeasons.Font.Size := 16;
+  redSeasons.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  redSeasons.ScrollBars := ssVertical;
+  redSeasons.ReadOnly := true;
+  redSeasons.TabStop := false;
 end;
 
 procedure TfrmShowDetails.InitializeForm;
@@ -160,6 +175,8 @@ begin
 end;
 
 procedure TfrmShowDetails.LoadShowDetails;
+Var
+  iPrimaryKey, iCompletedSeasons : integer;
 begin
   dmShowTracker.tblWatched.Open;
   dmShowTracker.tblWatched.RecNo := frmWatched.iRecordNo;
@@ -175,7 +192,38 @@ begin
   lblDateCompleted.Caption := 'You completed this show on: ';
   lblDateCompleted2.Caption := DateToStr(dmShowTracker.tblWatched['DateCompleted']);
 
+  redSeasons.Clear;
+
   dmShowTracker.tblWatched.Close;
+
+  //check database for new extra seasons
+  dmShowTracker.tblWatched.Open;
+  dmShowTracker.tblWatched.RecNo := frmWatched.iRecordNo;
+  iPrimarykey := dmShowTracker.tblWatched['ID'];
+  iCompletedSeasons := dmShowTracker.tblWatched['Seasons'];
+  dmShowTracker.tblWatched.Close;
+
+  dmShowTracker.tblNewSeasons.Open;
+  dmShowTracker.tblNewSeasons.First;
+
+  repeat
+    if dmShowTracker.tblNewSeasons['ID'] = iPrimaryKey then
+    begin
+      if dmShowTracker.tblNewSeasons['Seasons'] > 1 then
+        redSeasons.Lines.Add('You completed seasons ' +
+        IntToStr((dmShowTracker.tblNewSeasons['OldSeasons'] + 1)) + ' - ' +
+        intToStr((dmShowTracker.tblNewSeasons['Seasons'] + dmShowTracker.tblNewSeasons['OldSeasons'])) +
+        ' on ' + DateToStr(dmShowTracker.tblNewSeasons['DateCompleted']) + #13)
+      else
+        redSeasons.Lines.Add('You completed season ' +
+        IntToStr((dmShowTracker.tblNewSeasons['Seasons'] + dmShowTracker.tblNewSeasons['OldSeasons'])) +
+        ' on ' + DateToStr(dmShowTracker.tblNewSeasons['DateCompleted']) + #13);
+    end;
+    dmShowTracker.tblNewSeasons.Next;
+  until (dmShowTracker.tblNewSeasons.Eof);
+
+  dmShowTracker.tblNewSeasons.Close;
+
 end;
 
 procedure TfrmShowDetails.pnlAddSeasonClick(Sender: TObject);

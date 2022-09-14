@@ -89,4 +89,20 @@ object frmShowDetails: TfrmShowDetails
     TabOrder = 1
     OnClick = pnlAddSeasonClick
   end
+  object redSeasons: TRichEdit
+    Left = 257
+    Top = 195
+    Width = 185
+    Height = 89
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Lines.Strings = (
+      'redSeasons')
+    ParentFont = False
+    TabOrder = 2
+    Zoom = 100
+  end
 end
