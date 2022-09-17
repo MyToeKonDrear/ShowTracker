@@ -228,6 +228,8 @@ begin
   dmShowTracker.tblWatched.Open; //open the table for validation
   dmShowTracker.tblWatched.RecNo := frmWatched.iRecordNo;
 
+  
+
   if (sName = dmShowTracker.tblWatched['ShowName'])
   AND (iSeasons = dmShowTracker.tblWatched['Seasons'])
   AND (iTimesWatched = dmShowTracker.tblWatched['TimesWatched'])

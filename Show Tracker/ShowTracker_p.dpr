@@ -9,7 +9,8 @@ uses
   ShowDetails_u in 'ShowDetails_u.pas' {frmShowDetails},
   Edit_u in 'Edit_u.pas' {frmEdit},
   Delete_u in 'Delete_u.pas' {frmDelete},
-  AddSeason_u in 'AddSeason_u.pas' {frmAddSeason};
+  AddSeason_u in 'AddSeason_u.pas' {frmAddSeason},
+  TimesWatched_u in 'TimesWatched_u.pas' {frmTimesWatched};
 
 {$R *.res}
 
@@ -24,5 +25,6 @@ begin
   Application.CreateForm(TfrmEdit, frmEdit);
   Application.CreateForm(TfrmDelete, frmDelete);
   Application.CreateForm(TfrmAddSeason, frmAddSeason);
+  Application.CreateForm(TfrmTimesWatched, frmTimesWatched);
   Application.Run;
 end.

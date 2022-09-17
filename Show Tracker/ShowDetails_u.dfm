@@ -105,4 +105,13 @@ object frmShowDetails: TfrmShowDetails
     TabOrder = 2
     Zoom = 100
   end
+  object pnlTimesWatched: TPanel
+    Left = 464
+    Top = 243
+    Width = 185
+    Height = 41
+    Caption = 'pnlTimesWatched'
+    TabOrder = 3
+    OnClick = pnlTimesWatchedClick
+  end
 end

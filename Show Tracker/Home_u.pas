@@ -42,7 +42,7 @@ var
 
 implementation
 
-uses Watched_u, AddWatched_u, Edit_u, Delete_u;
+uses Watched_u, AddWatched_u, Edit_u, Delete_u, TimesWatched_u;
 
 {$R *.dfm}
 

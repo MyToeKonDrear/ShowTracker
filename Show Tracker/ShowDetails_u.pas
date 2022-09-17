@@ -19,10 +19,12 @@ type
     lblTimesWatched2: TLabel;
     pnlAddSeason: TPanel;
     redSeasons: TRichEdit;
+    pnlTimesWatched: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure pnlEditClick(Sender: TObject);
     procedure pnlAddSeasonClick(Sender: TObject);
+    procedure pnlTimesWatchedClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -38,7 +40,7 @@ var
 
 implementation
 
-uses Home_u, Watched_u, dmShowTracker_u, Edit_u, AddSeason_u;
+uses Home_u, Watched_u, dmShowTracker_u, Edit_u, AddSeason_u, TimesWatched_u;
 
 {$R *.dfm}
 
@@ -112,7 +114,7 @@ begin
   pnlEdit.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   pnlEdit.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlEdit.font.Size := 16;
-  pnlEdit.Top := Trunc(0.9 * Screen.Height);
+  pnlEdit.Top := Trunc(0.85 * Screen.Height);
   pnlEdit.Width := Trunc(0.29 * Screen.Width);
   pnlEdit.Height := Trunc(0.03 * Screen.Height);
   pnlEdit.Left := Trunc(0.51 * Screen.Width);
@@ -126,12 +128,26 @@ begin
   pnlAddSeason.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   pnlAddSeason.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlAddSeason.font.Size := 16;
-  pnlAddSeason.Top := Trunc(0.9 * Screen.Height);
+  pnlAddSeason.Top := Trunc(0.85 * Screen.Height);
   pnlAddSeason.Width := Trunc(0.29 * Screen.Width);
   pnlAddSeason.Height := Trunc(0.03 * Screen.Height);
   pnlAddSeason.Left := Trunc(0.2 * Screen.Width);
   pnlAddSeason.BorderStyle := bsNone;
   pnlAddSeason.BevelOuter := bvNone;
+
+  //pnlTimesWatched
+  pnlTimesWatched.Caption := 'Increase Number of Times Watched';
+  pnlTimesWatched.ParentBackground := false;
+  pnlTimesWatched.ParentColor := false;
+  pnlTimesWatched.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  pnlTimesWatched.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  pnlTimesWatched.font.Size := 16;
+  pnlTimesWatched.Top := Trunc(0.9 * Screen.Height);
+  pnlTimesWatched.Width := Trunc(0.29 * Screen.Width);
+  pnlTimesWatched.Height := Trunc(0.03 * Screen.Height);
+  pnlTimesWatched.Left := Trunc(0.2 * Screen.Width);
+  pnlTimesWatched.BorderStyle := bsNone;
+  pnlTimesWatched.BevelOuter := bvNone;
 
   //redSeasons
   redSeasons.Clear;
@@ -176,7 +192,7 @@ end;
 
 procedure TfrmShowDetails.LoadShowDetails;
 Var
-  iPrimaryKey, iCompletedSeasons : integer;
+  iPrimaryKey : integer;
 begin
   dmShowTracker.tblWatched.Open;
   dmShowTracker.tblWatched.RecNo := frmWatched.iRecordNo;
@@ -200,14 +216,14 @@ begin
   dmShowTracker.tblWatched.Open;
   dmShowTracker.tblWatched.RecNo := frmWatched.iRecordNo;
   iPrimarykey := dmShowTracker.tblWatched['ID'];
-  iCompletedSeasons := dmShowTracker.tblWatched['Seasons'];
   dmShowTracker.tblWatched.Close;
 
   dmShowTracker.tblNewSeasons.Open;
   dmShowTracker.tblNewSeasons.First;
 
   repeat
-    if dmShowTracker.tblNewSeasons['ID'] = iPrimaryKey then
+    if (dmShowTracker.tblNewSeasons['ID'] = iPrimaryKey)
+    AND (dmShowTracker.tblNewSeasons['TimesWatched'] = 0) then
     begin
       if dmShowTracker.tblNewSeasons['Seasons'] > 1 then
         redSeasons.Lines.Add('You completed seasons ' +
@@ -221,6 +237,23 @@ begin
     end;
     dmShowTracker.tblNewSeasons.Next;
   until (dmShowTracker.tblNewSeasons.Eof);
+
+  dmShowTracker.tblNewSeasons.First; //reset the pointer to the top fo the records
+  repeat
+    if (dmShowTracker.tblNewSeasons['ID'] = iPrimaryKey)
+    AND (dmShowTracker.tblNewSeasons['TimesWatched'] > 0) then
+    begin
+    if (dmShowTracker.tblNewSeasons['TimesWatched']) > 1 then
+      redSeasons.Lines.Add('You rewatched this show ' +
+                           IntToStr(dmShowTracker.tblNewSeasons['TimesWatched']) +
+                           ' times on ' + DateToStr(dmShowTracker.tblNewSeasons['DateCompleted']) + #13)
+      else
+      redSeasons.Lines.Add('You rewatched this show once on ' +
+                           DateToStr(dmShowTracker.tblNewSeasons['DateCompleted']) + #13);
+
+    end;
+    dmShowTracker.tblNewSeasons.Next;
+  until (dmShowTracker.tblNewSeasons.Eof) ;
 
   dmShowTracker.tblNewSeasons.Close;
 
@@ -236,6 +269,12 @@ procedure TfrmShowDetails.pnlEditClick(Sender: TObject);
 begin
   frmShowDetails.Hide;
   frmEdit.Show;
+end;
+
+procedure TfrmShowDetails.pnlTimesWatchedClick(Sender: TObject);
+begin
+  frmShowDetails.Hide;
+  frmTimesWatched.Show;
 end;
 
 end.
