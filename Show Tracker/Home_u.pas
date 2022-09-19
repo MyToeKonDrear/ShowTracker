@@ -59,6 +59,7 @@ end;
 procedure TfrmHome.btnDeleteClick(Sender: TObject);
 begin
   frmHome.Hide;
+  frmWatched.PopulatestgWatched;
   frmDelete.Show;
 end;
 

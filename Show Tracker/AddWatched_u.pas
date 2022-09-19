@@ -19,6 +19,7 @@ type
     imgExit: TImage;
     imgLogo: TImage;
     imgBryn: TImage;
+    lblName: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure edtShowNameMouseEnter(Sender: TObject);
     procedure pnlEnterMouseEnter(Sender: TObject);
@@ -99,9 +100,16 @@ end;
 
 procedure TfrmAddWatched.InitializeComponents;
 begin
+  //lblName
+  lblName.Caption := 'Enter the name of the show:';
+  lblName.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  lblName.Font.Size := 16;
+  lblName.Left := Trunc(0.25 * Screen.width);
+  lblName.Top := Trunc(0.15 * Screen.Height);
+
   //edtShowName
   edtShowName.Clear;
-  edtShowName.Text := 'Enter the name of the show';
+  edtShowName.Text := 'Show Name';
   edtShowName.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   edtShowName.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   edtShowName.BorderStyle := bsNone;

@@ -29,6 +29,34 @@ object frmDelete: TfrmDelete
     Height = 13
     Caption = 'lblSearch'
   end
+  object lblDelete: TLabel
+    Left = 312
+    Top = 160
+    Width = 41
+    Height = 13
+    Caption = 'lblDelete'
+  end
+  object lblTimesWatched: TLabel
+    Left = 320
+    Top = 168
+    Width = 80
+    Height = 13
+    Caption = 'lblTimesWatched'
+  end
+  object lblSeasons: TLabel
+    Left = 328
+    Top = 176
+    Width = 50
+    Height = 13
+    Caption = 'lblSeasons'
+  end
+  object lblName: TLabel
+    Left = 336
+    Top = 184
+    Width = 37
+    Height = 13
+    Caption = 'lblName'
+  end
   object cmbShowNames: TComboBox
     Left = 56
     Top = 56
@@ -48,12 +76,39 @@ object frmDelete: TfrmDelete
     OnClick = edtSearchClick
   end
   object pnlDelete: TPanel
-    Left = 264
-    Top = 192
+    Left = 256
+    Top = 224
     Width = 185
     Height = 41
     Caption = 'pnlDelete'
     TabOrder = 2
     OnClick = pnlDeleteClick
+  end
+  object pnlSearch: TPanel
+    Left = 256
+    Top = 88
+    Width = 185
+    Height = 41
+    Caption = 'pnlSearch'
+    TabOrder = 3
+    OnClick = pnlSearchClick
+  end
+  object cmbTimesWatched: TComboBox
+    Left = 296
+    Top = 157
+    Width = 145
+    Height = 21
+    TabOrder = 4
+    Text = 'cmbTimesWatched'
+    OnClick = cmbTimesWatchedClick
+  end
+  object cmbSeasons: TComboBox
+    Left = 177
+    Top = 184
+    Width = 145
+    Height = 21
+    TabOrder = 5
+    Text = 'cmbSeasons'
+    OnClick = cmbSeasonsClick
   end
 end

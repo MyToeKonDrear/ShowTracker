@@ -13,14 +13,27 @@ type
     edtSearch: TEdit;
     lblSearch: TLabel;
     pnlDelete: TPanel;
+    pnlSearch: TPanel;
+    lblDelete: TLabel;
+    cmbTimesWatched: TComboBox;
+    lblTimesWatched: TLabel;
+    cmbSeasons: TComboBox;
+    lblSeasons: TLabel;
+    lblName: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure cmbShowNamesClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure pnlDeleteClick(Sender: TObject);
     procedure edtSearchClick(Sender: TObject);
+    procedure pnlSearchClick(Sender: TObject);
+    procedure cmbSeasonsClick(Sender: TObject);
+    procedure cmbTimesWatchedClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
+    iID, iRecordNo, iCount : integer;
+    arrPrimaryKeySeasons : array [1..100] of integer;
+    arrPrimaryKeyTimesWatched : array [1..100] of integer;
     procedure InitializeForm;
     procedure InitializeComponents;
   public
@@ -38,11 +51,56 @@ uses Home_u, Watched_u, dmShowTracker_u;
 
 { TfrmDelete }
 
+procedure TfrmDelete.cmbSeasonsClick(Sender: TObject);
+Var
+  sName : string;
+  iPrimaryKey : integer;
+begin
+  sName := cmbSeasons.Items[cmbSeasons.ItemIndex];
+  iPrimaryKey := arrPrimaryKeySeasons[cmbSeasons.ItemIndex + 1];
+
+  //confirm
+  if MessageDLG('Are you sure you want to permanently delete ' + sName +
+     '?',mtConfirmation,[mbYES,mbNO],0) = mrNO then
+     begin
+       MessageDLG(sName + ' was not deleted', mtInformation,[mbOK],0);
+       EXIT;
+     end;
+
+  //delete from database
+  with dmShowTracker do
+  begin
+    qryShowTracker.SQL.Clear;
+    qryShowTracker.SQL.Add('DELETE FROM NewSeasons WHERE PrimaryKey = ' + intToStr(iPrimaryKey));
+    qryShowTracker.ExecSQL;
+  end;
+
+  //feedback
+  MessageDLG(sName + ' was successfully deleted',mtInformation,[mbOK],0);
+
+  lblSearch.Show;
+  cmbShowNames.Show;
+  lblSelect.Show;
+  edtSearch.Show;
+  pnlSearch.Show;
+  lblname.Hide;
+  lblTimesWatched.Hide;
+  cmbTimesWatched.Hide;
+  lblSeasons.Hide;
+  cmbSeasons.Hide;
+  pnlDelete.Hide;
+
+  frmDelete.Hide;
+  frmHome.Show;
+
+end;
+
 procedure TfrmDelete.cmbShowNamesClick(Sender: TObject);
-Var sName : string;
+Var sName, sShowName : string;
+    bFound : boolean;
 begin
   //confirm
-  sName := cmbShowNames.Items[cmbShowNames.ItemIndex];
+  {sName := cmbShowNames.Items[cmbShowNames.ItemIndex];
   if MessageDLG('Are you sure you want to permanently delete ' + sName +
      '?',mtConfirmation,[mbYES,mbNO],0) = mrNO then
      begin
@@ -59,7 +117,140 @@ begin
   end;
 
   //Feedback
+  MessageDLG(sName + ' was successfully deleted',mtInformation,[mbOK],0); }
+
+  sName := cmbShowNames.Items[cmbShowNames.ItemIndex];
+
+  sShowName := '';
+  bFound := false;
+  iRecordNo := 0;
+  iID := 0;
+
+  //search for name in database
+  dmShowTracker.tblWatched.Open;
+  dmShowTracker.tblWatched.First;
+    repeat
+      if ContainsStr(lowercase(dmShowTracker.tblWatched['ShowName']), Lowercase(sName)) then
+      begin
+        bFound := true;
+        sShowName := dmShowTracker.tblWatched['ShowName'];
+        iID := dmShowTracker.tblWatched['ID'];
+        iRecordNo := dmShowTracker.tblWatched.RecNo;
+        lblName.Caption := sShowName;
+        break;
+      end;
+      dmShowTracker.tblWatched.Next;
+    until (dmShowTracker.tblWatched.Eof);
+  dmShowTracker.tblWatched.Close;
+
+  if bFound = false then
+  begin
+    MessageDLG(sName + ' was not found in the database',
+               mtError,[mbOK],0);
+    EXIT;
+  end;
+
+  dmShowTracker.tblNewSeasons.Open;
+  dmShowTracker.tblNewSeasons.First;
+
+  //validation
+  if sShowName = '' then
+  begin
+    MessageDLG('There has been an error (Search Failed), notify developer',mtError,[mbOK],0);
+    EXIT;
+  end;
+
+
+  //populate cmbTimesWatched
+  iCount := 1;
+  repeat
+    if (dmShowTracker.tblNewSeasons['ID'] = iID)
+    AND (dmShowTracker.tblNewSeasons['TimesWatched'] > 0) then
+    begin
+      cmbTimesWatched.Items.Add('Watched ' + IntToStr(dmShowTracker.tblNewSeasons['TimesWatched']) + ' time/s on '
+                               + dateToStr(dmShowTracker.tblNewSeasons['DateCompleted']));
+      arrPrimaryKeyTimesWatched[iCount] := dmSHowTracker.tblNewSeasons['PrimaryKey'];
+      inc(iCount);
+    end;
+    dmShowTracker.tblNewSeasons.Next;
+  until (dmShowTracker.tblNewSeasons.Eof);
+
+  //populate cmbSeasons
+  dmShowTracker.tblNewSeasons.First;
+  iCount := 1;
+
+  repeat
+    if (dmShowTracker.tblNewSeasons['ID'] = iID)
+    AND (dmShowTracker.tblNewSeasons['Seasons'] > 0) then
+    begin
+      if dmShowTracker.tblNewSeasons['Seasons'] > 1 then
+        cmbSeasons.Items.Add('You completed seasons ' +
+        IntToStr((dmShowTracker.tblNewSeasons['OldSeasons'] + 1)) + ' - ' +
+        intToStr((dmShowTracker.tblNewSeasons['Seasons'] + dmShowTracker.tblNewSeasons['OldSeasons'])) +
+        ' on ' + DateToStr(dmShowTracker.tblNewSeasons['DateCompleted']) + #13)
+      else
+        cmbSeasons.Items.Add('You completed season ' +
+        IntToStr((dmShowTracker.tblNewSeasons['Seasons'] + dmShowTracker.tblNewSeasons['OldSeasons'])) +
+        ' on ' + DateToStr(dmShowTracker.tblNewSeasons['DateCompleted']) + #13);
+      arrPrimaryKeySeasons[iCount] := dmShowTracker.tblNewSeasons['PrimaryKey'];
+      inc(iCount);
+    end;
+    dmShowTracker.tblNewSeasons.Next;
+  until (dmShowTracker.tblNewSeasons.Eof);
+
+  dmShowTracker.tblNewSeasons.Close;
+
+  lblSearch.Hide;
+  cmbShowNames.Hide;
+  lblSelect.Hide;
+  edtSearch.Hide;
+  pnlSearch.Hide;
+  lblName.Show;
+  lblTimesWatched.Show;
+  cmbTimesWatched.Show;
+  lblSeasons.Show;
+  cmbSeasons.Show;
+  pnlDelete.Show;
+end;
+
+procedure TfrmDelete.cmbTimesWatchedClick(Sender: TObject);
+Var
+  sName : string;
+  iPrimaryKey : integer;
+begin
+  sName := cmbTimesWatched.Items[cmbTimesWatched.ItemIndex];
+  iPrimaryKey := arrPrimaryKeyTimesWatched[cmbTimesWatched.ItemIndex + 1];
+
+  //confirm
+  if MessageDLG('Are you sure you want to permanently delete ' + sName +
+     '?',mtConfirmation,[mbYES,mbNO],0) = mrNO then
+     begin
+       MessageDLG(sName + ' was not deleted', mtInformation,[mbOK],0);
+       EXIT;
+     end;
+
+  //delete from database
+  with dmShowTracker do
+  begin
+    qryShowTracker.SQL.Clear;
+    qryShowTracker.SQL.Add('DELETE FROM NewSeasons WHERE PrimaryKey = ' + intToStr(iPrimaryKey));
+    qryShowTracker.ExecSQL;
+  end;
+
+  //feedback
   MessageDLG(sName + ' was successfully deleted',mtInformation,[mbOK],0);
+
+  lblSearch.Show;
+  cmbShowNames.Show;
+  lblSelect.Show;
+  edtSearch.Show;
+  pnlSearch.Show;
+  lblname.Hide;
+  lblTimesWatched.Hide;
+  cmbTimesWatched.Hide;
+  lblSeasons.Hide;
+  cmbSeasons.Hide;
+  pnlDelete.Hide;
 
   frmDelete.Hide;
   frmHome.Show;
@@ -78,6 +269,10 @@ end;
 
 procedure TfrmDelete.FormShow(Sender: TObject);
 begin
+  edtSearch.Text := 'Type the name of a show to search for it';
+  cmbShowNames.Clear;
+  cmbShowNames.Text := 'Select a show from here';
+
   dmShowTracker.tblWatched.Open;
   dmShowTracker.tblWatched.First;
   repeat
@@ -89,32 +284,46 @@ end;
 
 procedure TfrmDelete.InitializeComponents;
 begin
+  //pnlSearch
+  pnlSearch.Caption := 'Search';
+  pnlSearch.ParentBackground := false;
+  pnlSearch.ParentColor := false;
+  pnlSearch.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  pnlSearch.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  pnlSearch.font.Size := 16;
+  pnlSearch.Top := Trunc(0.8 * Screen.Height);
+  pnlSearch.Width := Trunc(0.25 * Screen.Width);
+  pnlSearch.Height := Trunc(0.03 * Screen.Height);
+  pnlSearch.Left := Trunc(0.5 * Screen.Width);
+  pnlSearch.BorderStyle := bsNone;
+  pnlSearch.BevelOuter := bvNone;
+
   //lblSelect
   lblSelect.Left := Trunc(0.25 * Screen.Width);
-  lblSelect.top := Trunc(0.25 * Screen.Height);
-  lblSelect.Caption := 'Select a show name to delete it using the drop down selector';
+  lblSelect.top := Trunc(0.20 * Screen.Height);
+  lblSelect.Caption := 'You can select a show name using the drop down selector';
   lblSelect.Font.Size := 16;
   lblSelect.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
 
   //cmbShowNames
   cmbShowNames.Left := Trunc(0.25 * Screen.Width);
-  cmbShowNames.Top := Trunc(0.3 * Screen.Height);
+  cmbShowNames.Top := Trunc(0.25 * Screen.Height);
   cmbShowNames.Width := Trunc(0.5 * Screen.Width);
   cmbShowNames.Font.Size := 16;
   cmbShowNames.font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
-  cmbShowNames.Text := 'Select a show to delete from here';
+  cmbShowNames.Text := 'Select a show from here';
   cmbShowNames.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 
   //lblSearch
   lblSearch.Left := Trunc(0.25 * Screen.Width);
-  lblSearch.top := Trunc(0.6 * Screen.Height);
-  lblSearch.Caption := 'If you want to search for the show to delete it, type the name here';
+  lblSearch.top := Trunc(0.55 * Screen.Height);
+  lblSearch.Caption := 'If you want to search for the show, type the name here';
   lblSearch.Font.Size := 16;
   lblSearch.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
 
   //edtSearch
   edtSearch.Left := Trunc(0.25 * Screen.Width);
-  edtSearch.Top := Trunc(0.65 * Screen.Height);
+  edtSearch.Top := Trunc(0.6 * Screen.Height);
   edtSearch.width := Trunc(0.5 * Screen.Width);
   edtSearch.Font.Size := 16;
   edtSearch.font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
@@ -122,19 +331,62 @@ begin
   edtSearch.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 
   //pnlDelete
-  pnlDelete.Caption := 'Delete';
+  pnlDelete.Caption := 'Click to delete entire show';
   pnlDelete.ParentBackground := false;
   pnlDelete.ParentColor := false;
   pnlDelete.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   pnlDelete.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlDelete.font.Size := 16;
-  pnlDelete.Top := Trunc(0.8 * Screen.Height);
-  pnlDelete.Width := Trunc(0.25 * Screen.Width);
+  pnlDelete.Top := Trunc(0.80 * Screen.Height);
+  pnlDelete.Width := Trunc(0.5 * Screen.Width);
   pnlDelete.Height := Trunc(0.03 * Screen.Height);
-  pnlDelete.Left := Trunc(0.5 * Screen.Width);
+  pnlDelete.Left := Trunc(0.25 * Screen.Width);
   pnlDelete.BorderStyle := bsNone;
   pnlDelete.BevelOuter := bvNone;
+  pnlDelete.Hide;
 
+  //lblName
+  lblName.Left := Trunc(0.25 * Screen.Width);
+  lblName.top := Trunc(0.15 * Screen.Height);
+  lblName.Font.Size := 24;
+  lblName.Font.Color := rgb(frmHome.arrTertiaryCOlor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  lblName.Hide;
+
+  //lblTimesWatched
+  lblTimesWatched.Left := Trunc(0.25 * Screen.Width);
+  lblTimesWatched.top := Trunc(0.3 * Screen.Height);
+  lblTimesWatched.Caption := 'Select a rewatch to delete it using the drop down selector';
+  lblTimesWatched.Font.Size := 16;
+  lblTimesWatched.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  lblTimesWatched.Hide;
+
+  //cmbTimesWatched
+  cmbTimesWatched.Left := Trunc(0.25 * Screen.Width);
+  cmbTimesWatched.Top := Trunc(0.35 * Screen.Height);
+  cmbTimesWatched.Width := Trunc(0.3 * Screen.Width);
+  cmbTimesWatched.Font.Size := 16;
+  cmbTimesWatched.font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  cmbTimesWatched.Text := 'Select a rewatch to delete from here';
+  cmbTimesWatched.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  cmbTimesWatched.Hide;
+
+  //cmbSeasons
+  cmbSeasons.Left := Trunc(0.25 * Screen.Width);
+  cmbSeasons.Top := Trunc(0.6 * Screen.Height);
+  cmbSeasons.Width := Trunc(0.5 * Screen.Width);
+  cmbSeasons.Font.Size := 16;
+  cmbSeasons.font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  cmbSeasons.Text := 'Select a season to delete from here';
+  cmbSeasons.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  cmbSeasons.Hide;
+
+  //lblSeasons
+  lblSeasons.Left := Trunc(0.25 * Screen.Width);
+  lblSeasons.top := Trunc(0.55 * Screen.Height);
+  lblSeasons.Caption := 'Select a season to delete using the drop down selector';
+  lblSeasons.Font.Size := 16;
+  lblSeasons.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  lblSeasons.Hide;
 end;
 
 procedure TfrmDelete.InitializeForm;
@@ -164,7 +416,57 @@ begin
 end;
 
 procedure TfrmDelete.pnlDeleteClick(Sender: TObject);
-Var sName, sShowName : string;
+begin
+  dmShowTracker.tblWatched.Open;
+  dmShowTracker.tblWatched.RecNo := iRecordno;
+
+  //confirm
+  if MEssageDLG('Are you sure you want to permanently delete ' + dmSHowTracker.tblWatched['ShowName'] +
+     '?',mtConfirmation,[mbYES,mbNO],0) = mrNO then
+     begin
+       MessageDLG(dmSHowTracker.tblWatched['ShowName'] + ' was not deleted', mtInformation,[mbOK],0);
+       EXIT;
+     end;
+
+  //delete from database
+  with dmShowTracker do
+  begin
+    qryShowTracker.SQL.Clear;
+    qryShowTracker.SQL.Add('DELETE FROM Watched WHERE ShowName = ' + QuotedStr(dmSHowTracker.tblWatched['ShowName']));
+    qryShowTracker.ExecSQL;
+  end;
+
+  with dmShowTracker do
+  begin
+    qryShowTracker.SQL.Clear;
+    qryShowTracker.SQL.Add('DELETE FROM NewSeasons WHERE ID = ' + IntToStr(dmShowTracker.tblWatched['ID']));
+    qryShowTracker.ExecSQL;
+  end;
+
+  //feedback
+  MessageDLG(dmSHowTracker.tblWatched['ShowName'] + ' has been successfully deleted',mtInformation,[mbOK],0);
+
+  dmShowTracker.tblWatched.Close;
+
+  lblSearch.Show;
+  cmbShowNames.Show;
+  lblSelect.Show;
+  edtSearch.Show;
+  pnlSearch.Show;
+  lblname.Hide;
+  lblTimesWatched.Hide;
+  cmbTimesWatched.Hide;
+  lblSeasons.Hide;
+  cmbSeasons.Hide;
+  pnlDelete.Hide;
+
+  frmDelete.Hide;
+  frmHome.Show;
+end;
+
+procedure TfrmDelete.pnlSearchClick(Sender: TObject);
+Var
+  sName, sShowName : string;
   bFound : boolean;
 begin
   //Validation
@@ -185,6 +487,7 @@ begin
   sName := edtSearch.Text;
   sShowName := '';
   bFound := false;
+  iRecordNo := 0;
 
   //search for name in database
   dmShowTracker.tblWatched.Open;
@@ -194,6 +497,9 @@ begin
       begin
         bFound := true;
         sShowName := dmShowTracker.tblWatched['ShowName'];
+        iID := dmShowTracker.tblWatched['ID'];
+        iRecordNo := dmShowTracker.tblWatched.RecNo;
+        lblName.Caption := sShowName;
         break;
       end;
       dmShowTracker.tblWatched.Next;
@@ -202,10 +508,13 @@ begin
 
   if bFound = false then
   begin
-    MessageDLG(sName + ' was not found in the database, try using the drop down selector',
+    MessageDLG(sName + ' was not found in the database',
                mtError,[mbOK],0);
     EXIT;
   end;
+
+  dmShowTracker.tblNewSeasons.Open;
+  dmShowTracker.tblNewSeasons.First;
 
   //validation
   if sShowName = '' then
@@ -214,28 +523,58 @@ begin
     EXIT;
   end;
 
-  //confirm
-  if MEssageDLG('Are you sure you want to permanently delete ' + sShowName +
-     '?',mtConfirmation,[mbYES,mbNO],0) = mrNO then
-     begin
-       MessageDLG(sShowName + ' was not deleted', mtInformation,[mbOK],0);
-       edtSearch.SetFocus;
-       EXIT;
-     end;
 
-  //delete from database
-  with dmShowTracker do
-  begin
-    qryShowTracker.SQL.Clear;
-    qryShowTracker.SQL.Add('DELETE FROM Watched WHERE ShowName = ' + QuotedStr(sShowName));
-    qryShowTracker.ExecSQL;
-  end;
+  //populate cmbTimesWatched
+  iCount := 1;
+  repeat
+    if (dmShowTracker.tblNewSeasons['ID'] = iID)
+    AND (dmShowTracker.tblNewSeasons['TimesWatched'] > 0) then
+    begin
+      cmbTimesWatched.Items.Add('Watched ' + IntToStr(dmShowTracker.tblNewSeasons['TimesWatched']) + ' time/s on '
+                               + dateToStr(dmShowTracker.tblNewSeasons['DateCompleted']));
+      arrPrimaryKeyTimesWatched[iCount] := dmSHowTracker.tblNewSeasons['PrimaryKey'];
+      inc(iCount);
+    end;
+    dmShowTracker.tblNewSeasons.Next;
 
-  //feedback
-  MessageDLG(sShowName + ' has been successfully deleted',mtInformation,[mbOK],0);
+  until (dmShowTracker.tblNewSeasons.Eof);
 
-  frmDelete.Hide;
-  frmHome.Show;
+  //populate cmbSeasons
+  dmShowTracker.tblNewSeasons.First;
+
+  iCount := 1;
+  repeat
+    if (dmShowTracker.tblNewSeasons['ID'] = iID)
+    AND (dmShowTracker.tblNewSeasons['Seasons'] > 0) then
+    begin
+      if dmShowTracker.tblNewSeasons['Seasons'] > 1 then
+        cmbSeasons.Items.Add('You completed seasons ' +
+        IntToStr((dmShowTracker.tblNewSeasons['OldSeasons'] + 1)) + ' - ' +
+        intToStr((dmShowTracker.tblNewSeasons['Seasons'] + dmShowTracker.tblNewSeasons['OldSeasons'])) +
+        ' on ' + DateToStr(dmShowTracker.tblNewSeasons['DateCompleted']) + #13)
+      else
+        cmbSeasons.Items.Add('You completed season ' +
+        IntToStr((dmShowTracker.tblNewSeasons['Seasons'] + dmShowTracker.tblNewSeasons['OldSeasons'])) +
+        ' on ' + DateToStr(dmShowTracker.tblNewSeasons['DateCompleted']) + #13);
+      arrPrimaryKeySeasons[iCount] := dmShowTracker.tblNewSeasons['PrimaryKey'];
+      inc(iCount);
+    end;
+    dmShowTracker.tblNewSeasons.Next;
+  until (dmShowTracker.tblNewSeasons.Eof);
+
+  dmShowTracker.tblNewSeasons.Close;
+
+  lblSearch.Hide;
+  cmbShowNames.Hide;
+  lblSelect.Hide;
+  edtSearch.Hide;
+  pnlSearch.Hide;
+  lblname.Show;
+  lblTimesWatched.Show;
+  cmbTimesWatched.Show;
+  lblSeasons.Show;
+  cmbSeasons.Show;
+  pnlDelete.Show;
 end;
 
 end.

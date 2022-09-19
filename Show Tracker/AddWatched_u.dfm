@@ -58,6 +58,13 @@ object frmAddWatched: TfrmAddWatched
     Width = 105
     Height = 105
   end
+  object lblName: TLabel
+    Left = 544
+    Top = 408
+    Width = 37
+    Height = 13
+    Caption = 'lblName'
+  end
   object edtShowName: TEdit
     Left = 16
     Top = 12
