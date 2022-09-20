@@ -71,6 +71,36 @@ object frmShowDetails: TfrmShowDetails
     Height = 13
     Caption = 'lblTimesWatched2'
   end
+  object imgLogo: TImage
+    Left = 272
+    Top = 120
+    Width = 105
+    Height = 105
+  end
+  object imgHome: TImage
+    Left = 280
+    Top = 128
+    Width = 105
+    Height = 105
+    OnClick = imgHomeClick
+    OnMouseEnter = imgHomeMouseEnter
+    OnMouseLeave = imgHomeMouseLeave
+  end
+  object imgBryn: TImage
+    Left = 288
+    Top = 136
+    Width = 105
+    Height = 105
+  end
+  object imgExit: TImage
+    Left = 296
+    Top = 144
+    Width = 105
+    Height = 105
+    OnClick = imgExitClick
+    OnMouseEnter = imgExitMouseEnter
+    OnMouseLeave = imgExitMouseLeave
+  end
   object pnlEdit: TPanel
     Left = 128
     Top = 97
@@ -79,6 +109,8 @@ object frmShowDetails: TfrmShowDetails
     Caption = 'pnlEdit'
     TabOrder = 0
     OnClick = pnlEditClick
+    OnMouseEnter = pnlEditMouseEnter
+    OnMouseLeave = pnlEditMouseLeave
   end
   object pnlAddSeason: TPanel
     Left = 104
@@ -88,6 +120,8 @@ object frmShowDetails: TfrmShowDetails
     Caption = 'pnlAddSeason'
     TabOrder = 1
     OnClick = pnlAddSeasonClick
+    OnMouseEnter = pnlAddSeasonMouseEnter
+    OnMouseLeave = pnlAddSeasonMouseLeave
   end
   object redSeasons: TRichEdit
     Left = 257
@@ -113,5 +147,7 @@ object frmShowDetails: TfrmShowDetails
     Caption = 'pnlTimesWatched'
     TabOrder = 3
     OnClick = pnlTimesWatchedClick
+    OnMouseEnter = pnlTimesWatchedMouseEnter
+    OnMouseLeave = pnlTimesWatchedMouseLeave
   end
 end

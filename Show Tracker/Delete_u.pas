@@ -20,6 +20,11 @@ type
     cmbSeasons: TComboBox;
     lblSeasons: TLabel;
     lblName: TLabel;
+    imgLogo: TImage;
+    imgHome: TImage;
+    imgBryn: TImage;
+    imgExit: TImage;
+    Image5: TImage;
     procedure FormCreate(Sender: TObject);
     procedure cmbShowNamesClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -28,6 +33,16 @@ type
     procedure pnlSearchClick(Sender: TObject);
     procedure cmbSeasonsClick(Sender: TObject);
     procedure cmbTimesWatchedClick(Sender: TObject);
+    procedure imgExitClick(Sender: TObject);
+    procedure imgExitMouseEnter(Sender: TObject);
+    procedure imgExitMouseLeave(Sender: TObject);
+    procedure imgHomeClick(Sender: TObject);
+    procedure imgHomeMouseEnter(Sender: TObject);
+    procedure imgHomeMouseLeave(Sender: TObject);
+    procedure pnlSearchMouseEnter(Sender: TObject);
+    procedure pnlSearchMouseLeave(Sender: TObject);
+    procedure pnlDeleteMouseEnter(Sender: TObject);
+    procedure pnlDeleteMouseLeave(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -36,6 +51,7 @@ type
     arrPrimaryKeyTimesWatched : array [1..100] of integer;
     procedure InitializeForm;
     procedure InitializeComponents;
+    procedure InitializeImages;
   public
     { Public declarations }
   end;
@@ -265,6 +281,7 @@ procedure TfrmDelete.FormCreate(Sender: TObject);
 begin
   InitializeForm;
   InitializeComponents;
+  InitializeImages;
 end;
 
 procedure TfrmDelete.FormShow(Sender: TObject);
@@ -280,6 +297,37 @@ begin
     dmShowTracker.tblWatched.Next;
   until (dmShowTracker.tblWatched.Eof);
   dmShowTracker.tblWatched.Close;
+end;
+
+procedure TfrmDelete.imgExitClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmDelete.imgExitMouseEnter(Sender: TObject);
+begin
+  imgExit.Picture.LoadFromFile('Images\ExitImage2.jpg');
+end;
+
+procedure TfrmDelete.imgExitMouseLeave(Sender: TObject);
+begin
+  imgExit.Picture.LoadFromFile('Images\ExitImage1.jpg');
+end;
+
+procedure TfrmDelete.imgHomeClick(Sender: TObject);
+begin
+  frmDelete.Hide;
+  frmHome.Show;
+end;
+
+procedure TfrmDelete.imgHomeMouseEnter(Sender: TObject);
+begin
+  imgHome.Picture.LoadFromFile('Images\HomeImage2.jpg');
+end;
+
+procedure TfrmDelete.imgHomeMouseLeave(Sender: TObject);
+begin
+  imgHome.Picture.LoadFromFile('Images\HomeImage1.jpg');
 end;
 
 procedure TfrmDelete.InitializeComponents;
@@ -415,6 +463,48 @@ begin
   shpHeader.Pen.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
 end;
 
+procedure TfrmDelete.InitializeImages;
+begin
+  //imglogo
+  imgLogo.Width := Trunc(0.1 * Screen.Width);
+  imgLogo.Height := shpHeader.Height;
+  imglogo.Left := Trunc(0.02 * Screen.Width);
+  imgLogo.top := 0;
+  imgLogo.Proportional := true;
+  imgLogo.Picture.LoadFromFile('Images\LogoImage.jpg');
+  //imgLogo.Cursor := crHandPoint;
+  imgLogo.BringToFront;
+
+  //exit image
+  imgExit.Width := shpHeader.Height;
+  imgExit.Height := Trunc(0.8 * shpHeader.Height);
+  imgExit.Left := Screen.Width - imgExit.Width;
+  imgExit.top := Trunc(0.1 * shpHeader.Height);
+  imgExit.Proportional := true;
+  imgExit.Picture.LoadFromFile('Images\ExitImage1.jpg');
+  imgExit.Cursor := crHandPoint;
+  imgExit.BringToFront;
+
+  //Home image
+  imgHome.Width := shpHeader.Height;
+  imgHome.Height := Trunc(0.8 * shpHeader.Height);
+  imgHome.Left := imgExit.Left - imgHome.Width;
+  imgHome.top := Trunc(0.1 * shpHeader.Height);
+  imgHome.Proportional := true;
+  imgHome.Picture.LoadFromFile('Images\HomeImage1.jpg');
+  imgHome.Cursor := crHandPoint;
+  imgHome.BringToFront;
+
+  //Bryn Image
+  imgBryn.Width := Trunc(0.1 * Screen.Width);
+  imgBryn.Height := Trunc(0.95 * shpHeader.Height);
+  imgBryn.Left := Trunc(0.45 * Screen.Width);
+  imgBryn.top := 0;
+  imgBryn.Proportional := true;
+  imgBryn.Picture.LoadFromFile('Images\BrynImage.jpg');
+  imgBryn.BringToFront;
+end;
+
 procedure TfrmDelete.pnlDeleteClick(Sender: TObject);
 begin
   dmShowTracker.tblWatched.Open;
@@ -462,6 +552,16 @@ begin
 
   frmDelete.Hide;
   frmHome.Show;
+end;
+
+procedure TfrmDelete.pnlDeleteMouseEnter(Sender: TObject);
+begin
+  pnlDelete.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmDelete.pnlDeleteMouseLeave(Sender: TObject);
+begin
+  pnlDelete.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 end;
 
 procedure TfrmDelete.pnlSearchClick(Sender: TObject);
@@ -575,6 +675,16 @@ begin
   lblSeasons.Show;
   cmbSeasons.Show;
   pnlDelete.Show;
+end;
+
+procedure TfrmDelete.pnlSearchMouseEnter(Sender: TObject);
+begin
+  pnlSearch.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmDelete.pnlSearchMouseLeave(Sender: TObject);
+begin
+  pnlSearch.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 end;
 
 end.

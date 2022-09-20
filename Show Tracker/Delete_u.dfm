@@ -57,6 +57,42 @@ object frmDelete: TfrmDelete
     Height = 13
     Caption = 'lblName'
   end
+  object imgLogo: TImage
+    Left = 272
+    Top = 120
+    Width = 105
+    Height = 105
+  end
+  object imgHome: TImage
+    Left = 280
+    Top = 128
+    Width = 105
+    Height = 105
+    OnClick = imgHomeClick
+    OnMouseEnter = imgHomeMouseEnter
+    OnMouseLeave = imgHomeMouseLeave
+  end
+  object imgBryn: TImage
+    Left = 288
+    Top = 136
+    Width = 105
+    Height = 105
+  end
+  object imgExit: TImage
+    Left = 296
+    Top = 144
+    Width = 105
+    Height = 105
+    OnClick = imgExitClick
+    OnMouseEnter = imgExitMouseEnter
+    OnMouseLeave = imgExitMouseLeave
+  end
+  object Image5: TImage
+    Left = 304
+    Top = 152
+    Width = 105
+    Height = 105
+  end
   object cmbShowNames: TComboBox
     Left = 56
     Top = 56
@@ -83,6 +119,8 @@ object frmDelete: TfrmDelete
     Caption = 'pnlDelete'
     TabOrder = 2
     OnClick = pnlDeleteClick
+    OnMouseEnter = pnlDeleteMouseEnter
+    OnMouseLeave = pnlDeleteMouseLeave
   end
   object pnlSearch: TPanel
     Left = 256
@@ -92,6 +130,8 @@ object frmDelete: TfrmDelete
     Caption = 'pnlSearch'
     TabOrder = 3
     OnClick = pnlSearchClick
+    OnMouseEnter = pnlSearchMouseEnter
+    OnMouseLeave = pnlSearchMouseLeave
   end
   object cmbTimesWatched: TComboBox
     Left = 296

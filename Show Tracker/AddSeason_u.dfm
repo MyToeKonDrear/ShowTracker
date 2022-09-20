@@ -36,6 +36,36 @@ object frmAddSeason: TfrmAddSeason
     Height = 13
     Caption = 'lblDate'
   end
+  object imgLogo: TImage
+    Left = 272
+    Top = 120
+    Width = 105
+    Height = 105
+  end
+  object imgExit: TImage
+    Left = 280
+    Top = 128
+    Width = 105
+    Height = 105
+    OnClick = imgExitClick
+    OnMouseEnter = imgExitMouseEnter
+    OnMouseLeave = imgExitMouseLeave
+  end
+  object imgHome: TImage
+    Left = 288
+    Top = 136
+    Width = 105
+    Height = 105
+    OnClick = imgHomeClick
+    OnMouseEnter = imgHomeMouseEnter
+    OnMouseLeave = imgHomeMouseLeave
+  end
+  object imgBryn: TImage
+    Left = 296
+    Top = 144
+    Width = 105
+    Height = 105
+  end
   object spnSeasons: TSpinEdit
     Left = 184
     Top = 192
@@ -54,6 +84,8 @@ object frmAddSeason: TfrmAddSeason
     Caption = 'pnlEnter'
     TabOrder = 1
     OnClick = pnlEnterClick
+    OnMouseEnter = pnlEnterMouseEnter
+    OnMouseLeave = pnlEnterMouseLeave
   end
   object dtpDate: TDatePicker
     Left = 400

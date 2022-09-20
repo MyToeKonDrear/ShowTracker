@@ -20,17 +20,34 @@ type
     pnlAddSeason: TPanel;
     redSeasons: TRichEdit;
     pnlTimesWatched: TPanel;
+    imgLogo: TImage;
+    imgHome: TImage;
+    imgBryn: TImage;
+    imgExit: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure pnlEditClick(Sender: TObject);
     procedure pnlAddSeasonClick(Sender: TObject);
     procedure pnlTimesWatchedClick(Sender: TObject);
+    procedure imgHomeClick(Sender: TObject);
+    procedure imgHomeMouseEnter(Sender: TObject);
+    procedure imgHomeMouseLeave(Sender: TObject);
+    procedure imgExitClick(Sender: TObject);
+    procedure imgExitMouseEnter(Sender: TObject);
+    procedure imgExitMouseLeave(Sender: TObject);
+    procedure pnlEditMouseEnter(Sender: TObject);
+    procedure pnlEditMouseLeave(Sender: TObject);
+    procedure pnlAddSeasonMouseEnter(Sender: TObject);
+    procedure pnlAddSeasonMouseLeave(Sender: TObject);
+    procedure pnlTimesWatchedMouseEnter(Sender: TObject);
+    procedure pnlTimesWatchedMouseLeave(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
     procedure InitializeForm;
     procedure InitializeComponents;
     procedure LoadShowDetails;
+    procedure InitializeImages;
   public
     { Public declarations }
   end;
@@ -50,11 +67,43 @@ procedure TfrmShowDetails.FormCreate(Sender: TObject);
 begin
   InitializeForm;
   InitializeComponents;
+  InitializeImages;
 end;
 
 procedure TfrmShowDetails.FormShow(Sender: TObject);
 begin
   LoadShowDetails;
+end;
+
+procedure TfrmShowDetails.imgExitClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmShowDetails.imgExitMouseEnter(Sender: TObject);
+begin
+  imgExit.Picture.LoadFromFile('Images\ExitImage2.jpg');
+end;
+
+procedure TfrmShowDetails.imgExitMouseLeave(Sender: TObject);
+begin
+  imgExit.Picture.LoadFromFile('Images\ExitImage1.jpg');
+end;
+
+procedure TfrmShowDetails.imgHomeClick(Sender: TObject);
+begin
+  frmShowDetails.Hide;
+  frmHome.Show;
+end;
+
+procedure TfrmShowDetails.imgHomeMouseEnter(Sender: TObject);
+begin
+  imgHome.Picture.LoadFromFile('Images\HomeImage2.jpg');
+end;
+
+procedure TfrmShowDetails.imgHomeMouseLeave(Sender: TObject);
+begin
+  imgHome.Picture.LoadFromFile('Images\HomeImage1.jpg');
 end;
 
 procedure TfrmShowDetails.InitializeComponents;
@@ -115,9 +164,9 @@ begin
   pnlEdit.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlEdit.font.Size := 16;
   pnlEdit.Top := Trunc(0.85 * Screen.Height);
-  pnlEdit.Width := Trunc(0.29 * Screen.Width);
+  pnlEdit.Width := Trunc(0.6 * Screen.Width);
   pnlEdit.Height := Trunc(0.03 * Screen.Height);
-  pnlEdit.Left := Trunc(0.51 * Screen.Width);
+  pnlEdit.Left := Trunc(0.2 * Screen.Width);
   pnlEdit.BorderStyle := bsNone;
   pnlEdit.BevelOuter := bvNone;
 
@@ -128,10 +177,10 @@ begin
   pnlAddSeason.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   pnlAddSeason.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlAddSeason.font.Size := 16;
-  pnlAddSeason.Top := Trunc(0.85 * Screen.Height);
+  pnlAddSeason.Top := Trunc(0.9 * Screen.Height);
   pnlAddSeason.Width := Trunc(0.29 * Screen.Width);
   pnlAddSeason.Height := Trunc(0.03 * Screen.Height);
-  pnlAddSeason.Left := Trunc(0.2 * Screen.Width);
+  pnlAddSeason.Left := Trunc(0.20 * Screen.Width);
   pnlAddSeason.BorderStyle := bsNone;
   pnlAddSeason.BevelOuter := bvNone;
 
@@ -145,7 +194,7 @@ begin
   pnlTimesWatched.Top := Trunc(0.9 * Screen.Height);
   pnlTimesWatched.Width := Trunc(0.29 * Screen.Width);
   pnlTimesWatched.Height := Trunc(0.03 * Screen.Height);
-  pnlTimesWatched.Left := Trunc(0.2 * Screen.Width);
+  pnlTimesWatched.Left := Trunc(0.51 * Screen.Width);
   pnlTimesWatched.BorderStyle := bsNone;
   pnlTimesWatched.BevelOuter := bvNone;
 
@@ -188,6 +237,48 @@ begin
   shpHeader.Height := Trunc(0.08 * screen.Height);
   shpHeader.Brush.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
   shpHeader.Pen.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmShowDetails.InitializeImages;
+begin
+  //imglogo
+  imgLogo.Width := Trunc(0.1 * Screen.Width);
+  imgLogo.Height := shpHeader.Height;
+  imglogo.Left := Trunc(0.02 * Screen.Width);
+  imgLogo.top := 0;
+  imgLogo.Proportional := true;
+  imgLogo.Picture.LoadFromFile('Images\LogoImage.jpg');
+  //imgLogo.Cursor := crHandPoint;
+  imgLogo.BringToFront;
+
+  //exit image
+  imgExit.Width := shpHeader.Height;
+  imgExit.Height := Trunc(0.8 * shpHeader.Height);
+  imgExit.Left := Screen.Width - imgExit.Width;
+  imgExit.top := Trunc(0.1 * shpHeader.Height);
+  imgExit.Proportional := true;
+  imgExit.Picture.LoadFromFile('Images\ExitImage1.jpg');
+  imgExit.Cursor := crHandPoint;
+  imgExit.BringToFront;
+
+  //Home image
+  imgHome.Width := shpHeader.Height;
+  imgHome.Height := Trunc(0.8 * shpHeader.Height);
+  imgHome.Left := imgExit.Left - imgHome.Width;
+  imgHome.top := Trunc(0.1 * shpHeader.Height);
+  imgHome.Proportional := true;
+  imgHome.Picture.LoadFromFile('Images\HomeImage1.jpg');
+  imgHome.Cursor := crHandPoint;
+  imgHome.BringToFront;
+
+  //Bryn Image
+  imgBryn.Width := Trunc(0.1 * Screen.Width);
+  imgBryn.Height := Trunc(0.95 * shpHeader.Height);
+  imgBryn.Left := Trunc(0.45 * Screen.Width);
+  imgBryn.top := 0;
+  imgBryn.Proportional := true;
+  imgBryn.Picture.LoadFromFile('Images\BrynImage.jpg');
+  imgBryn.BringToFront;
 end;
 
 procedure TfrmShowDetails.LoadShowDetails;
@@ -265,16 +356,46 @@ begin
   frmAddSeason.show;
 end;
 
+procedure TfrmShowDetails.pnlAddSeasonMouseEnter(Sender: TObject);
+begin
+  pnlAddSeason.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmShowDetails.pnlAddSeasonMouseLeave(Sender: TObject);
+begin
+  pnlAddSeason.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+end;
+
 procedure TfrmShowDetails.pnlEditClick(Sender: TObject);
 begin
   frmShowDetails.Hide;
   frmEdit.Show;
 end;
 
+procedure TfrmShowDetails.pnlEditMouseEnter(Sender: TObject);
+begin
+  pnlEdit.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmShowDetails.pnlEditMouseLeave(Sender: TObject);
+begin
+  pnlEdit.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+end;
+
 procedure TfrmShowDetails.pnlTimesWatchedClick(Sender: TObject);
 begin
   frmShowDetails.Hide;
   frmTimesWatched.Show;
+end;
+
+procedure TfrmShowDetails.pnlTimesWatchedMouseEnter(Sender: TObject);
+begin
+  pnlTimesWatched.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmShowDetails.pnlTimesWatchedMouseLeave(Sender: TObject);
+begin
+  pnlTimesWatched.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 end;
 
 end.

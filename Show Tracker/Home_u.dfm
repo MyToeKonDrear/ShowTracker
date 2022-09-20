@@ -45,31 +45,37 @@ object frmHome: TfrmHome
     Width = 105
     Height = 105
   end
-  object btnAddWatched: TButton
-    Left = 280
-    Top = 152
-    Width = 75
-    Height = 25
-    Caption = 'btnAddWatched'
+  object pnlAddWatched: TPanel
+    Left = 512
+    Top = 176
+    Width = 185
+    Height = 41
+    Caption = 'pnlAddWatched'
     TabOrder = 0
-    OnClick = btnAddWatchedClick
+    OnClick = pnlAddWatchedClick
+    OnMouseEnter = pnlAddWatchedMouseEnter
+    OnMouseLeave = pnlAddWatchedMouseLeave
   end
-  object btnWatched: TButton
-    Left = 280
-    Top = 232
-    Width = 75
-    Height = 25
-    Caption = 'btnWatched'
-    TabOrder = 1
-    OnClick = btnWatchedClick
-  end
-  object btnDelete: TButton
-    Left = 280
+  object pnlWatched: TPanel
+    Left = 432
     Top = 280
-    Width = 75
-    Height = 25
-    Caption = 'btnDelete'
+    Width = 185
+    Height = 41
+    Caption = 'pnlWatched'
+    TabOrder = 1
+    OnClick = pnlWatchedClick
+    OnMouseEnter = pnlWatchedMouseEnter
+    OnMouseLeave = pnlWatchedMouseLeave
+  end
+  object pnlDelete: TPanel
+    Left = 488
+    Top = 319
+    Width = 185
+    Height = 41
+    Caption = 'pnlDelete'
     TabOrder = 2
-    OnClick = btnDeleteClick
+    OnClick = pnlDeleteClick
+    OnMouseEnter = pnlDeleteMouseEnter
+    OnMouseLeave = pnlDeleteMouseLeave
   end
 end

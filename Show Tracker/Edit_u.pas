@@ -17,15 +17,28 @@ type
     pnlEnter: TPanel;
     lblDate: TLabel;
     dtpDate: TDatePicker;
+    imgLogo: TImage;
+    imgHome: TImage;
+    imgExit: TImage;
+    imgBryn: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure pnlEnterClick(Sender: TObject);
+    procedure imgExitClick(Sender: TObject);
+    procedure imgExitMouseEnter(Sender: TObject);
+    procedure imgExitMouseLeave(Sender: TObject);
+    procedure imgHomeClick(Sender: TObject);
+    procedure imgHomeMouseEnter(Sender: TObject);
+    procedure imgHomeMouseLeave(Sender: TObject);
+    procedure pnlEnterMouseEnter(Sender: TObject);
+    procedure pnlEnterMouseLeave(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
     procedure InitializeForm;
     procedure InitializeComponents;
     procedure ResetComponents;
+    procedure InitializeImages;
   public
     { Public declarations }
   end;
@@ -45,6 +58,7 @@ procedure TfrmEdit.FormCreate(Sender: TObject);
 begin
   InitializeForm;
   InitializeComponents;
+  InitializeImages;
 end;
 
 procedure TfrmEdit.FormShow(Sender: TObject);
@@ -59,6 +73,37 @@ begin
   dtpDate.Date := dmShowTracker.tblWatched['DateCompleted'];
 
   dmShowTracker.tblWatched.Close;
+end;
+
+procedure TfrmEdit.imgExitClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmEdit.imgExitMouseEnter(Sender: TObject);
+begin
+  imgExit.Picture.LoadFromFile('Images\ExitImage2.jpg');
+end;
+
+procedure TfrmEdit.imgExitMouseLeave(Sender: TObject);
+begin
+  imgExit.Picture.LoadFromFile('Images\ExitImage1.jpg');
+end;
+
+procedure TfrmEdit.imgHomeClick(Sender: TObject);
+begin
+  frmEdit.Hide;
+  frmHome.Show;
+end;
+
+procedure TfrmEdit.imgHomeMouseEnter(Sender: TObject);
+begin
+  imgHome.Picture.LoadFromFile('Images\HomeImage2.jpg');
+end;
+
+procedure TfrmEdit.imgHomeMouseLeave(Sender: TObject);
+begin
+  imgHome.Picture.LoadFromFile('Images\HomeImage1.jpg');
 end;
 
 procedure TfrmEdit.InitializeComponents;
@@ -184,6 +229,48 @@ begin
   shpHeader.Pen.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
 end;
 
+procedure TfrmEdit.InitializeImages;
+begin
+  //imglogo
+  imgLogo.Width := Trunc(0.1 * Screen.Width);
+  imgLogo.Height := shpHeader.Height;
+  imglogo.Left := Trunc(0.02 * Screen.Width);
+  imgLogo.top := 0;
+  imgLogo.Proportional := true;
+  imgLogo.Picture.LoadFromFile('Images\LogoImage.jpg');
+  //imgLogo.Cursor := crHandPoint;
+  imgLogo.BringToFront;
+
+  //exit image
+  imgExit.Width := shpHeader.Height;
+  imgExit.Height := Trunc(0.8 * shpHeader.Height);
+  imgExit.Left := Screen.Width - imgExit.Width;
+  imgExit.top := Trunc(0.1 * shpHeader.Height);
+  imgExit.Proportional := true;
+  imgExit.Picture.LoadFromFile('Images\ExitImage1.jpg');
+  imgExit.Cursor := crHandPoint;
+  imgExit.BringToFront;
+
+  //Home image
+  imgHome.Width := shpHeader.Height;
+  imgHome.Height := Trunc(0.8 * shpHeader.Height);
+  imgHome.Left := imgExit.Left - imgHome.Width;
+  imgHome.top := Trunc(0.1 * shpHeader.Height);
+  imgHome.Proportional := true;
+  imgHome.Picture.LoadFromFile('Images\HomeImage1.jpg');
+  imgHome.Cursor := crHandPoint;
+  imgHome.BringToFront;
+
+  //Bryn Image
+  imgBryn.Width := Trunc(0.1 * Screen.Width);
+  imgBryn.Height := Trunc(0.95 * shpHeader.Height);
+  imgBryn.Left := Trunc(0.45 * Screen.Width);
+  imgBryn.top := 0;
+  imgBryn.Proportional := true;
+  imgBryn.Picture.LoadFromFile('Images\BrynImage.jpg');
+  imgBryn.BringToFront;
+end;
+
 procedure TfrmEdit.pnlEnterClick(Sender: TObject);
 Var
   sName : string;
@@ -300,6 +387,16 @@ begin
   frmEdit.Hide;
   frmHome.Show;
 
+end;
+
+procedure TfrmEdit.pnlEnterMouseEnter(Sender: TObject);
+begin
+  pnlEnter.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmEdit.pnlEnterMouseLeave(Sender: TObject);
+begin
+  pnlEnter.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 end;
 
 procedure TfrmEdit.ResetComponents;

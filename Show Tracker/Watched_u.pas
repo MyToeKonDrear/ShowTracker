@@ -146,7 +146,7 @@ end;
 
 procedure TfrmWatched.InitializeImages;
 begin
-  //logo
+  //imglogo
   imgLogo.Width := Trunc(0.1 * Screen.Width);
   imgLogo.Height := shpHeader.Height;
   imglogo.Left := Trunc(0.02 * Screen.Width);
