@@ -12,6 +12,7 @@ type
     tblToWatch: TADOTable;
     qryShowTracker: TADOQuery;
     tblNewSeasons: TADOTable;
+    tblTracker: TADOTable;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

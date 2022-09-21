@@ -14,7 +14,7 @@ object dmShowTracker: TdmShowTracker
       '1;Jet OLEDB:New Database Password="";Jet OLEDB:Create System Dat' +
       'abase=False;Jet OLEDB:Encrypt Database=False;Jet OLEDB:Don'#39't Cop' +
       'y Locale on Compact=False;Jet OLEDB:Compact Without Replica Repa' +
-      'ir=False;Jet OLEDB:SFP=False;'
+      'ir=False;Jet OLEDB:SFP=False'
     LoginPrompt = False
     Provider = 'Microsoft.Jet.OLEDB.4.0'
     Left = 184
@@ -24,14 +24,14 @@ object dmShowTracker: TdmShowTracker
     Connection = conShowTracker
     CursorType = ctStatic
     TableName = 'Watched'
-    Left = 72
-    Top = 104
+    Left = 24
+    Top = 96
   end
   object tblToWatch: TADOTable
     Connection = conShowTracker
     CursorType = ctStatic
     TableName = 'ToWatch'
-    Left = 288
+    Left = 216
     Top = 104
   end
   object qryShowTracker: TADOQuery
@@ -44,7 +44,14 @@ object dmShowTracker: TdmShowTracker
     Connection = conShowTracker
     CursorType = ctStatic
     TableName = 'NewSeasons'
-    Left = 184
-    Top = 112
+    Left = 96
+    Top = 96
+  end
+  object tblTracker: TADOTable
+    Connection = conShowTracker
+    CursorType = ctStatic
+    TableName = 'Tracker'
+    Left = 296
+    Top = 104
   end
 end

@@ -78,4 +78,15 @@ object frmHome: TfrmHome
     OnMouseEnter = pnlDeleteMouseEnter
     OnMouseLeave = pnlDeleteMouseLeave
   end
+  object pnlTracker: TPanel
+    Left = 176
+    Top = 280
+    Width = 185
+    Height = 41
+    Caption = 'pnlTracker'
+    TabOrder = 3
+    OnClick = pnlTrackerClick
+    OnMouseEnter = pnlTrackerMouseEnter
+    OnMouseLeave = pnlTrackerMouseLeave
+  end
 end

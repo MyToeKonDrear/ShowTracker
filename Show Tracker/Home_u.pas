@@ -16,6 +16,7 @@ type
     pnlAddWatched: TPanel;
     pnlWatched: TPanel;
     pnlDelete: TPanel;
+    pnlTracker: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure imgHomeMouseEnter(Sender: TObject);
     procedure imgHomeMouseLeave(Sender: TObject);
@@ -31,6 +32,9 @@ type
     procedure pnlDeleteClick(Sender: TObject);
     procedure pnlDeleteMouseEnter(Sender: TObject);
     procedure pnlDeleteMouseLeave(Sender: TObject);
+    procedure pnlTrackerClick(Sender: TObject);
+    procedure pnlTrackerMouseEnter(Sender: TObject);
+    procedure pnlTrackerMouseLeave(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -50,7 +54,7 @@ var
 
 implementation
 
-uses Watched_u, AddWatched_u, Edit_u, Delete_u, TimesWatched_u;
+uses Watched_u, AddWatched_u, Edit_u, Delete_u, TimesWatched_u, Tracker_u;
 
 {$R *.dfm}
 
@@ -153,6 +157,21 @@ begin
   pnlDelete.BorderStyle := bsNone;
   pnlDelete.BevelOuter := bvNone;
   pnlDelete.Cursor := crHandPoint;
+
+  //pnlTracker
+  pnlTracker.Caption := 'Episode Tracker';
+  pnlTracker.ParentBackground := false;
+  pnlTracker.ParentColor := false;
+  pnlTracker.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  pnlTracker.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  pnlTracker.font.Size := 16;
+  pnlTracker.Top := Trunc(0.9 * Screen.Height);
+  pnlTracker.Width := Trunc(0.5 * Screen.Width);
+  pnlTracker.Height := Trunc(0.1 * Screen.Height);
+  pnlTracker.Left := Trunc(0.25 * Screen.Width);
+  pnlTracker.BorderStyle := bsNone;
+  pnlTracker.BevelOuter := bvNone;
+  pnlTracker.Cursor := crHandPoint;
 end;
 
 procedure TfrmHome.InitializeForm;
@@ -257,6 +276,22 @@ end;
 procedure TfrmHome.pnlDeleteMouseLeave(Sender: TObject);
 begin
   pnlDelete.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+end;
+
+procedure TfrmHome.pnlTrackerClick(Sender: TObject);
+begin
+  frmHome.Hide;
+  frmTracker.Show;
+end;
+
+procedure TfrmHome.pnlTrackerMouseEnter(Sender: TObject);
+begin
+  pnlTracker.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmHome.pnlTrackerMouseLeave(Sender: TObject);
+begin
+  pnlTracker.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 end;
 
 procedure TfrmHome.pnlWatchedClick(Sender: TObject);
