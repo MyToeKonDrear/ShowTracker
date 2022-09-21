@@ -17,6 +17,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.Title := 'Show Tracker';
   Application.CreateForm(TfrmHome, frmHome);
   Application.CreateForm(TfrmWatched, frmWatched);
   Application.CreateForm(TfrmAddWatched, frmAddWatched);

@@ -188,6 +188,7 @@ begin
   dtpDate.BorderStyle := bsNone;
   dtpDate.DateFormat := 'dd/MMM/yyyy';
   //dtpDate.Hide;
+  dtpDate.Cursor := crHandPoint;
 
   //pnlEnter
   pnlEnter.Caption := 'Enter';
@@ -202,6 +203,7 @@ begin
   pnlEnter.Left := Trunc(0.5 * Screen.Width);
   pnlEnter.BorderStyle := bsNone;
   pnlEnter.BevelOuter := bvNone;
+  pnlEnter.Cursor := crHandPoint;
 end;
 
 procedure TfrmEdit.InitializeForm;

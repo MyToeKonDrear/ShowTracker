@@ -164,6 +164,7 @@ begin
   dpDAteCompleted.HotColor :=  rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   dpDateCompleted.BorderStyle := bsNone;
   dpDateCompleted.DateFormat := 'dd/MMM/yyyy';
+  dpDateCompleted.Cursor := crHandPoint;
 
   //pnlEnter
   pnlEnter.Caption := 'Enter Show';
@@ -178,6 +179,7 @@ begin
   pnlEnter.Left := ((edtShowName.Width + edtShowName.left) - pnlEnter.Width);
   pnlEnter.BorderStyle := bsNone;
   pnlEnter.BevelOuter := bvNone;
+  pnlEnter.Cursor := crHandPoint;
 end;
 
 procedure TfrmAddWatched.InitializeForm;

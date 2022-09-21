@@ -122,6 +122,7 @@ begin
   pnlAddWatched.Left := Trunc(0.25 * Screen.Width);
   pnlAddWatched.BorderStyle := bsNone;
   pnlAddWatched.BevelOuter := bvNone;
+  pnlAddWatched.Cursor := crHandPoint;
 
   //pnlWatched
   pnlWatched.Caption := 'View Watched Shows';
@@ -136,6 +137,7 @@ begin
   pnlWatched.Left := Trunc(0.25 * Screen.Width);
   pnlWatched.BorderStyle := bsNone;
   pnlWatched.BevelOuter := bvNone;
+  pnlWatched.Cursor := crHandPoint;
 
   //pnlDelete
   pnlDelete.Caption := 'Delete Shows';
@@ -150,6 +152,7 @@ begin
   pnlDelete.Left := Trunc(0.25 * Screen.Width);
   pnlDelete.BorderStyle := bsNone;
   pnlDelete.BevelOuter := bvNone;
+  pnlDelete.Cursor := crHandPoint;
 end;
 
 procedure TfrmHome.InitializeForm;
@@ -176,6 +179,9 @@ begin
   shpHeader.Height := Trunc(0.08 * screen.Height);
   shpHeader.Brush.Color := rgb(arrSecondaryColor[1],arrSecondaryColor[2],arrSecondaryColor[3]);
   shpHeader.Pen.Color := rgb(arrSecondaryColor[1],arrSecondaryColor[2],arrSecondaryColor[3]);
+
+  //icon
+  Application.Icon.LoadFromFile('Images\Icon.ico');
 end;
 
 procedure TfrmHome.InitializeImages;

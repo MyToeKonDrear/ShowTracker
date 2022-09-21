@@ -116,6 +116,7 @@ begin
   //stgWatched.Canvas.Brush.Color := rgb(frmHome.arrBackgroundColor[1],frmHome.arrBackgroundColor[2],frmHome.arrBackgroundColor[3]);
   // stgWatched.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   stgWatched.DefaultDrawing := false;
+  stgwatched.Cursor := crHandPoint;
 end;
 
 procedure TfrmWatched.InitializeForm;

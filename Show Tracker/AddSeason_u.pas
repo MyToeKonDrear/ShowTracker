@@ -151,6 +151,7 @@ begin
   dtpDate.HotColor :=  rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   dtpDate.BorderStyle := bsNone;
   dtpDate.DateFormat := 'dd/MMM/yyyy';
+  dtpDate.Cursor := crHandPoint;
 
   //pnlEnter
   pnlEnter.Caption := 'Enter';
@@ -165,6 +166,7 @@ begin
   pnlEnter.Left := Trunc(0.5 * Screen.Width);
   pnlEnter.BorderStyle := bsNone;
   pnlEnter.BevelOuter := bvNone;
+  pnlEnter.Cursor := crHandPoint;
 
 end;
 

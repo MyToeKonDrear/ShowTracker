@@ -345,6 +345,7 @@ begin
   pnlSearch.Left := Trunc(0.5 * Screen.Width);
   pnlSearch.BorderStyle := bsNone;
   pnlSearch.BevelOuter := bvNone;
+  pnlSearch.Cursor := crHandPoint;
 
   //lblSelect
   lblSelect.Left := Trunc(0.25 * Screen.Width);
@@ -392,6 +393,7 @@ begin
   pnlDelete.BorderStyle := bsNone;
   pnlDelete.BevelOuter := bvNone;
   pnlDelete.Hide;
+  pnlDelete.Cursor := crHandPoint;
 
   //lblName
   lblName.Left := Trunc(0.25 * Screen.Width);

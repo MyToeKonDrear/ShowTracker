@@ -169,6 +169,7 @@ begin
   pnlEdit.Left := Trunc(0.2 * Screen.Width);
   pnlEdit.BorderStyle := bsNone;
   pnlEdit.BevelOuter := bvNone;
+  pnlEdit.Cursor := crHandPoint;
 
   //pnlAddSeason
   pnlAddSeason.Caption := 'Add New Seasons Watched';
@@ -183,6 +184,7 @@ begin
   pnlAddSeason.Left := Trunc(0.20 * Screen.Width);
   pnlAddSeason.BorderStyle := bsNone;
   pnlAddSeason.BevelOuter := bvNone;
+  pnlAddSeason.Cursor := crHandPoint;
 
   //pnlTimesWatched
   pnlTimesWatched.Caption := 'Increase Number of Times Watched';
@@ -197,6 +199,7 @@ begin
   pnlTimesWatched.Left := Trunc(0.51 * Screen.Width);
   pnlTimesWatched.BorderStyle := bsNone;
   pnlTimesWatched.BevelOuter := bvNone;
+  pnlTimesWatched.Cursor := crHandPoint;
 
   //redSeasons
   redSeasons.Clear;
