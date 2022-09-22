@@ -68,6 +68,7 @@ object frmToWatch: TfrmToWatch
     Height = 41
     Caption = 'pnlAdd'
     TabOrder = 1
+    OnClick = pnlAddClick
   end
   object pnlDelete: TPanel
     Left = 8

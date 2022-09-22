@@ -28,6 +28,7 @@ type
     procedure pnlDeleteClick(Sender: TObject);
     procedure cmbDeleteClick(Sender: TObject);
     procedure pnlRandomClick(Sender: TObject);
+    procedure pnlAddClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -44,7 +45,7 @@ var
 
 implementation
 
-uses Home_u, dmShowTracker_u;
+uses Home_u, dmShowTracker_u, AddToWatch_u;
 
 {$R *.dfm}
 
@@ -79,7 +80,7 @@ begin
   MessageDLG(sName + ' was successfully deleted',mtInformation,[mbOK],0);
 
 
-  pnlDelete.Hide;
+  cmbDelete.hide;
   pnlAdd.Show;
   pnlDelete.Show;
   pnlrandom.Show;
@@ -314,6 +315,12 @@ begin
 
   dmShowTracker.tblToWatch.Close;
 
+end;
+
+procedure TfrmToWatch.pnlAddClick(Sender: TObject);
+begin
+  frmToWatch.Hide;
+  frmAddToWatch.Show;
 end;
 
 procedure TfrmToWatch.pnlDeleteClick(Sender: TObject);

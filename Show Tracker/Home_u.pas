@@ -18,6 +18,7 @@ type
     pnlDelete: TPanel;
     pnlTracker: TPanel;
     pnlToWatch: TPanel;
+    pnlStats: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure imgHomeMouseEnter(Sender: TObject);
     procedure imgHomeMouseLeave(Sender: TObject);
@@ -37,6 +38,10 @@ type
     procedure pnlTrackerMouseEnter(Sender: TObject);
     procedure pnlTrackerMouseLeave(Sender: TObject);
     procedure pnlToWatchClick(Sender: TObject);
+    procedure pnlToWatchMouseEnter(Sender: TObject);
+    procedure pnlToWatchMouseLeave(Sender: TObject);
+    procedure pnlStatsMouseEnter(Sender: TObject);
+    procedure pnlStatsMouseLeave(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -123,9 +128,9 @@ begin
   pnlAddWatched.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlAddWatched.font.Size := 16;
   pnlAddWatched.Top := Trunc(0.2 * Screen.Height);
-  pnlAddWatched.Width := Trunc(0.5 * Screen.Width);
+  pnlAddWatched.Width := Trunc(0.29 * Screen.Width);
   pnlAddWatched.Height := Trunc(0.1 * Screen.Height);
-  pnlAddWatched.Left := Trunc(0.25 * Screen.Width);
+  pnlAddWatched.Left := Trunc(0.51 * Screen.Width);
   pnlAddWatched.BorderStyle := bsNone;
   pnlAddWatched.BevelOuter := bvNone;
   pnlAddWatched.Cursor := crHandPoint;
@@ -138,9 +143,9 @@ begin
   pnlWatched.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlWatched.font.Size := 16;
   pnlWatched.Top := Trunc(0.5 * Screen.Height);
-  pnlWatched.Width := Trunc(0.5 * Screen.Width);
+  pnlWatched.Width := Trunc(0.29 * Screen.Width);
   pnlWatched.Height := Trunc(0.1 * Screen.Height);
-  pnlWatched.Left := Trunc(0.25 * Screen.Width);
+  pnlWatched.Left := Trunc(0.51 * Screen.Width);
   pnlWatched.BorderStyle := bsNone;
   pnlWatched.BevelOuter := bvNone;
   pnlWatched.Cursor := crHandPoint;
@@ -153,9 +158,9 @@ begin
   pnlDelete.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlDelete.font.Size := 16;
   pnlDelete.Top := Trunc(0.8 * Screen.Height);
-  pnlDelete.Width := Trunc(0.5 * Screen.Width);
+  pnlDelete.Width := Trunc(0.29 * Screen.Width);
   pnlDelete.Height := Trunc(0.1 * Screen.Height);
-  pnlDelete.Left := Trunc(0.25 * Screen.Width);
+  pnlDelete.Left := Trunc(0.51 * Screen.Width);
   pnlDelete.BorderStyle := bsNone;
   pnlDelete.BevelOuter := bvNone;
   pnlDelete.Cursor := crHandPoint;
@@ -167,13 +172,43 @@ begin
   pnlTracker.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   pnlTracker.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlTracker.font.Size := 16;
-  pnlTracker.Top := Trunc(0.9 * Screen.Height);
-  pnlTracker.Width := Trunc(0.5 * Screen.Width);
+  pnlTracker.Top := Trunc(0.2 * Screen.Height);
+  pnlTracker.Width := Trunc(0.29 * Screen.Width);
   pnlTracker.Height := Trunc(0.1 * Screen.Height);
-  pnlTracker.Left := Trunc(0.25 * Screen.Width);
+  pnlTracker.Left := Trunc(0.2 * Screen.Width);
   pnlTracker.BorderStyle := bsNone;
   pnlTracker.BevelOuter := bvNone;
   pnlTracker.Cursor := crHandPoint;
+
+  //pnlToWatch
+  pnlToWatch.Caption := 'Shows To Watch';
+  pnlToWatch.ParentBackground := false;
+  pnlToWatch.ParentColor := false;
+  pnlToWatch.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  pnlToWatch.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  pnlToWatch.font.Size := 16;
+  pnlToWatch.Top := Trunc(0.5 * Screen.Height);
+  pnlToWatch.Width := Trunc(0.29 * Screen.Width);
+  pnlToWatch.Height := Trunc(0.1 * Screen.Height);
+  pnlToWatch.Left := Trunc(0.2 * Screen.Width);
+  pnlToWatch.BorderStyle := bsNone;
+  pnlToWatch.BevelOuter := bvNone;
+  pnlToWatch.Cursor := crHandPoint;
+
+  //pnlStats
+  pnlStats.Caption := 'Statistics';
+  pnlStats.ParentBackground := false;
+  pnlStats.ParentColor := false;
+  pnlStats.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+  pnlStats.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
+  pnlStats.font.Size := 16;
+  pnlStats.Top := Trunc(0.8 * Screen.Height);
+  pnlStats.Width := Trunc(0.29 * Screen.Width);
+  pnlStats.Height := Trunc(0.1 * Screen.Height);
+  pnlStats.Left := Trunc(0.2 * Screen.Width);
+  pnlStats.BorderStyle := bsNone;
+  pnlStats.BevelOuter := bvNone;
+  pnlStats.Cursor := crHandPoint;
 end;
 
 procedure TfrmHome.InitializeForm;
@@ -280,11 +315,31 @@ begin
   pnlDelete.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 end;
 
+procedure TfrmHome.pnlStatsMouseEnter(Sender: TObject);
+begin
+  pnlStats.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmHome.pnlStatsMouseLeave(Sender: TObject);
+begin
+  pnlStats.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+end;
+
 procedure TfrmHome.pnlToWatchClick(Sender: TObject);
 begin
   frmHome.Hide;
   frmToWatch.Show;
   frmToWatch.LoadToWatch;
+end;
+
+procedure TfrmHome.pnlToWatchMouseEnter(Sender: TObject);
+begin
+  pnlToWatch.Color := rgb(frmHome.arrSecondaryColor[1],frmHome.arrSecondaryColor[2],frmHome.arrSecondaryColor[3]);
+end;
+
+procedure TfrmHome.pnlToWatchMouseLeave(Sender: TObject);
+begin
+  pnlToWatch.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
 end;
 
 procedure TfrmHome.pnlTrackerClick(Sender: TObject);

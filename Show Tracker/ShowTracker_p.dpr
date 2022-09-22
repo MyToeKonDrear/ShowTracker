@@ -12,7 +12,8 @@ uses
   AddSeason_u in 'AddSeason_u.pas' {frmAddSeason},
   TimesWatched_u in 'TimesWatched_u.pas' {frmTimesWatched},
   Tracker_u in 'Tracker_u.pas' {frmTracker},
-  ToWatch_u in 'ToWatch_u.pas' {frmToWatch};
+  ToWatch_u in 'ToWatch_u.pas' {frmToWatch},
+  AddToWatch_u in 'AddToWatch_u.pas' {frmAddToWatch};
 
 {$R *.res}
 
@@ -31,5 +32,6 @@ begin
   Application.CreateForm(TfrmTimesWatched, frmTimesWatched);
   Application.CreateForm(TfrmTracker, frmTracker);
   Application.CreateForm(TfrmToWatch, frmToWatch);
+  Application.CreateForm(TfrmAddToWatch, frmAddToWatch);
   Application.Run;
 end.
