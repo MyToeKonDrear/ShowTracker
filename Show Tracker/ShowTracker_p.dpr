@@ -11,7 +11,8 @@ uses
   Delete_u in 'Delete_u.pas' {frmDelete},
   AddSeason_u in 'AddSeason_u.pas' {frmAddSeason},
   TimesWatched_u in 'TimesWatched_u.pas' {frmTimesWatched},
-  Tracker_u in 'Tracker_u.pas' {frmTracker};
+  Tracker_u in 'Tracker_u.pas' {frmTracker},
+  ToWatch_u in 'ToWatch_u.pas' {frmToWatch};
 
 {$R *.res}
 
@@ -29,5 +30,6 @@ begin
   Application.CreateForm(TfrmAddSeason, frmAddSeason);
   Application.CreateForm(TfrmTimesWatched, frmTimesWatched);
   Application.CreateForm(TfrmTracker, frmTracker);
+  Application.CreateForm(TfrmToWatch, frmToWatch);
   Application.Run;
 end.

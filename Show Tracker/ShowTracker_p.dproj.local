@@ -2,39 +2,42 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2022/08/30 16:04:20.000.148,=G:\Delphi Projects\Unit1.pas</Transaction>
-    <Transaction>2022/08/30 16:05:45.000.916,G:\Delphi Projects\Show Tracker\Home_u.pas=G:\Delphi Projects\Unit1.pas</Transaction>
-    <Transaction>2022/08/30 16:05:45.000.916,G:\Delphi Projects\Show Tracker\Home_u.dfm=G:\Delphi Projects\Unit1.dfm</Transaction>
-    <Transaction>2022/08/30 16:06:04.000.737,G:\Delphi Projects\Show Tracker\ShowTracker_p.dproj=G:\Delphi Projects\Project1.dproj</Transaction>
+    <Transaction>2022/08/30 16:05:45.000.916,G:\Delphi Projects\Unit1.pas=G:\Delphi Projects\Show Tracker\Home_u.pas</Transaction>
+    <Transaction>2022/08/30 16:05:45.000.916,G:\Delphi Projects\Unit1.dfm=G:\Delphi Projects\Show Tracker\Home_u.dfm</Transaction>
+    <Transaction>2022/08/30 16:06:04.000.737,G:\Delphi Projects\Project1.dproj=G:\Delphi Projects\Show Tracker\ShowTracker_p.dproj</Transaction>
     <Transaction>2022/09/01 00:21:05.000.085,=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/01 00:21:27.000.876,G:\Delphi Projects\Show Tracker\Watched_u.dfm=G:\Delphi Projects\Show Tracker\Unit1.dfm</Transaction>
-    <Transaction>2022/09/01 00:21:27.000.876,G:\Delphi Projects\Show Tracker\Watched_u.pas=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
+    <Transaction>2022/09/01 00:21:27.000.876,G:\Delphi Projects\Show Tracker\Unit1.dfm=G:\Delphi Projects\Show Tracker\Watched_u.dfm</Transaction>
+    <Transaction>2022/09/01 00:21:27.000.876,G:\Delphi Projects\Show Tracker\Unit1.pas=G:\Delphi Projects\Show Tracker\Watched_u.pas</Transaction>
     <Transaction>2022/09/04 21:52:21.000.593,=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/04 21:52:39.000.440,G:\Delphi Projects\Show Tracker\AddWatched_u.pas=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/04 21:52:39.000.440,G:\Delphi Projects\Show Tracker\AddWatched_u.dfm=G:\Delphi Projects\Show Tracker\Unit1.dfm</Transaction>
+    <Transaction>2022/09/04 21:52:39.000.440,G:\Delphi Projects\Show Tracker\Unit1.dfm=G:\Delphi Projects\Show Tracker\AddWatched_u.dfm</Transaction>
+    <Transaction>2022/09/04 21:52:39.000.440,G:\Delphi Projects\Show Tracker\Unit1.pas=G:\Delphi Projects\Show Tracker\AddWatched_u.pas</Transaction>
     <Transaction>2022/09/06 12:00:05.000.383,=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
     <Transaction>2022/09/06 12:00:19.000.080,=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/06 12:00:27.000.915,G:\Delphi Projects\Show Tracker\dm_ShowTracker.pas=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/06 12:00:27.000.915,G:\Delphi Projects\Show Tracker\dm_ShowTracker.dfm=G:\Delphi Projects\Show Tracker\Unit1.dfm</Transaction>
-    <Transaction>2022/09/06 12:12:48.000.824,G:\Delphi Projects\Show Tracker\dmShowTracker_u.dfm=G:\Delphi Projects\Show Tracker\dm_ShowTracker.dfm</Transaction>
-    <Transaction>2022/09/06 12:12:48.000.824,G:\Delphi Projects\Show Tracker\dmShowTracker_u.pas=G:\Delphi Projects\Show Tracker\dm_ShowTracker.pas</Transaction>
+    <Transaction>2022/09/06 12:00:27.000.915,G:\Delphi Projects\Show Tracker\Unit1.pas=G:\Delphi Projects\Show Tracker\dm_ShowTracker.pas</Transaction>
+    <Transaction>2022/09/06 12:00:27.000.915,G:\Delphi Projects\Show Tracker\Unit1.dfm=G:\Delphi Projects\Show Tracker\dm_ShowTracker.dfm</Transaction>
+    <Transaction>2022/09/06 12:12:48.000.824,G:\Delphi Projects\Show Tracker\dm_ShowTracker.dfm=G:\Delphi Projects\Show Tracker\dmShowTracker_u.dfm</Transaction>
+    <Transaction>2022/09/06 12:12:48.000.824,G:\Delphi Projects\Show Tracker\dm_ShowTracker.pas=G:\Delphi Projects\Show Tracker\dmShowTracker_u.pas</Transaction>
     <Transaction>2022/09/11 00:34:20.000.839,=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/11 00:34:29.000.044,G:\Delphi Projects\Show Tracker\ShowDetails_u.dfm=G:\Delphi Projects\Show Tracker\Unit1.dfm</Transaction>
-    <Transaction>2022/09/11 00:34:29.000.044,G:\Delphi Projects\Show Tracker\ShowDetails_u.pas=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
+    <Transaction>2022/09/11 00:34:29.000.044,G:\Delphi Projects\Show Tracker\Unit1.dfm=G:\Delphi Projects\Show Tracker\ShowDetails_u.dfm</Transaction>
+    <Transaction>2022/09/11 00:34:29.000.044,G:\Delphi Projects\Show Tracker\Unit1.pas=G:\Delphi Projects\Show Tracker\ShowDetails_u.pas</Transaction>
     <Transaction>2022/09/12 11:44:30.000.539,=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/12 11:49:24.000.881,G:\Delphi Projects\Show Tracker\Unit1.pas=G:\Delphi Projects\Show Tracker\Edit_u.pas</Transaction>
-    <Transaction>2022/09/12 11:49:24.000.881,G:\Delphi Projects\Show Tracker\Unit1.dfm=G:\Delphi Projects\Show Tracker\Edit_u.dfm</Transaction>
+    <Transaction>2022/09/12 11:49:24.000.881,G:\Delphi Projects\Show Tracker\Edit_u.pas=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
+    <Transaction>2022/09/12 11:49:24.000.881,G:\Delphi Projects\Show Tracker\Edit_u.dfm=G:\Delphi Projects\Show Tracker\Unit1.dfm</Transaction>
     <Transaction>2022/09/12 23:31:42.000.029,=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/12 23:31:48.000.968,G:\Delphi Projects\Show Tracker\Delete_u.pas=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/12 23:31:48.000.968,G:\Delphi Projects\Show Tracker\Delete_u.dfm=G:\Delphi Projects\Show Tracker\Unit1.dfm</Transaction>
+    <Transaction>2022/09/12 23:31:48.000.968,G:\Delphi Projects\Show Tracker\Unit1.pas=G:\Delphi Projects\Show Tracker\Delete_u.pas</Transaction>
+    <Transaction>2022/09/12 23:31:48.000.968,G:\Delphi Projects\Show Tracker\Unit1.dfm=G:\Delphi Projects\Show Tracker\Delete_u.dfm</Transaction>
     <Transaction>2022/09/13 20:53:45.000.660,=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/13 20:54:12.000.123,G:\Delphi Projects\Show Tracker\AddSeason_u.pas=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/13 20:54:12.000.123,G:\Delphi Projects\Show Tracker\AddSeason_u.dfm=G:\Delphi Projects\Show Tracker\Unit1.dfm</Transaction>
+    <Transaction>2022/09/13 20:54:12.000.123,G:\Delphi Projects\Show Tracker\Unit1.pas=G:\Delphi Projects\Show Tracker\AddSeason_u.pas</Transaction>
+    <Transaction>2022/09/13 20:54:12.000.123,G:\Delphi Projects\Show Tracker\Unit1.dfm=G:\Delphi Projects\Show Tracker\AddSeason_u.dfm</Transaction>
     <Transaction>2022/09/17 14:25:48.000.016,=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/17 14:26:15.000.063,G:\Delphi Projects\Show Tracker\TimesWatched_u.dfm=G:\Delphi Projects\Show Tracker\Unit1.dfm</Transaction>
-    <Transaction>2022/09/17 14:26:15.000.063,G:\Delphi Projects\Show Tracker\TimesWatched_u.pas=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
+    <Transaction>2022/09/17 14:26:15.000.063,G:\Delphi Projects\Show Tracker\Unit1.pas=G:\Delphi Projects\Show Tracker\TimesWatched_u.pas</Transaction>
+    <Transaction>2022/09/17 14:26:15.000.063,G:\Delphi Projects\Show Tracker\Unit1.dfm=G:\Delphi Projects\Show Tracker\TimesWatched_u.dfm</Transaction>
     <Transaction>2022/09/21 15:16:52.000.239,=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/21 15:17:15.000.439,G:\Delphi Projects\Show Tracker\Tracker_u.pas=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
-    <Transaction>2022/09/21 15:17:15.000.439,G:\Delphi Projects\Show Tracker\Tracker_u.dfm=G:\Delphi Projects\Show Tracker\Unit1.dfm</Transaction>
+    <Transaction>2022/09/21 15:17:15.000.439,G:\Delphi Projects\Show Tracker\Unit1.pas=G:\Delphi Projects\Show Tracker\Tracker_u.pas</Transaction>
+    <Transaction>2022/09/21 15:17:15.000.439,G:\Delphi Projects\Show Tracker\Unit1.dfm=G:\Delphi Projects\Show Tracker\Tracker_u.dfm</Transaction>
+    <Transaction>2022/09/22 08:06:29.485,=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
+    <Transaction>2022/09/22 08:07:38.686,G:\Delphi Projects\Show Tracker\ToWatch_u.pas=G:\Delphi Projects\Show Tracker\Unit1.pas</Transaction>
+    <Transaction>2022/09/22 08:07:38.686,G:\Delphi Projects\Show Tracker\ToWatch_u.dfm=G:\Delphi Projects\Show Tracker\Unit1.dfm</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="AddWatched_u.pas"/>
@@ -57,5 +60,7 @@
     <File Path="TimesWatched_u.dfm"/>
     <File Path="Tracker_u.pas"/>
     <File Path="Tracker_u.dfm"/>
+    <File Path="ToWatch_u.pas"/>
+    <File Path="ToWatch_u.dfm"/>
   </ProjectSortOrder>
 </BorlandProject>

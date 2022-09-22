@@ -17,6 +17,7 @@ type
     pnlWatched: TPanel;
     pnlDelete: TPanel;
     pnlTracker: TPanel;
+    pnlToWatch: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure imgHomeMouseEnter(Sender: TObject);
     procedure imgHomeMouseLeave(Sender: TObject);
@@ -35,6 +36,7 @@ type
     procedure pnlTrackerClick(Sender: TObject);
     procedure pnlTrackerMouseEnter(Sender: TObject);
     procedure pnlTrackerMouseLeave(Sender: TObject);
+    procedure pnlToWatchClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -54,7 +56,7 @@ var
 
 implementation
 
-uses Watched_u, AddWatched_u, Edit_u, Delete_u, TimesWatched_u, Tracker_u;
+uses Watched_u, AddWatched_u, Edit_u, Delete_u, TimesWatched_u, Tracker_u, ToWatch_u;
 
 {$R *.dfm}
 
@@ -276,6 +278,13 @@ end;
 procedure TfrmHome.pnlDeleteMouseLeave(Sender: TObject);
 begin
   pnlDelete.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+end;
+
+procedure TfrmHome.pnlToWatchClick(Sender: TObject);
+begin
+  frmHome.Hide;
+  frmToWatch.Show;
+  frmToWatch.LoadToWatch;
 end;
 
 procedure TfrmHome.pnlTrackerClick(Sender: TObject);
