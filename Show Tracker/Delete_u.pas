@@ -70,7 +70,8 @@ uses Home_u, Watched_u, dmShowTracker_u;
 procedure TfrmDelete.cmbSeasonsClick(Sender: TObject);
 Var
   sName : string;
-  iPrimaryKey : integer;
+  iPrimaryKey, iSeasons, iID : integer;
+  i: Integer;
 begin
   sName := cmbSeasons.Items[cmbSeasons.ItemIndex];
   iPrimaryKey := arrPrimaryKeySeasons[cmbSeasons.ItemIndex + 1];
@@ -82,6 +83,24 @@ begin
        MessageDLG(sName + ' was not deleted', mtInformation,[mbOK],0);
        EXIT;
      end;
+
+  //Remove number of seasons deleted from tblWatched Seasons
+  dmShowTracker.tblNewSeasons.Open;
+  dmShowTracker.tblNewSeasons.First;
+  while not (dmShowTracker.tblNewSeasons['PrimaryKey'] = iPrimaryKey) do
+    dmShowTracker.tblNewSeasons.Next;
+
+  iSeasons := dmShowTracker.tblNewSeasons['OldSeasons'];
+  iID := dmShowTracker.tblNewSeasons['ID'];
+
+  dmShowTracker.tblNewSeasons.Close;
+
+  with dmShowTracker do
+  begin
+    qryShowTracker.SQL.Clear;
+    qryShowTracker.SQL.Add('UPDATE Watched SET Seasons = ' + IntToStr(iSeasons) + ' WHERE ID = ' + IntToStr(iID));
+    qryShowTracker.ExecSQL;
+  end;
 
   //delete from database
   with dmShowTracker do
@@ -316,6 +335,18 @@ end;
 
 procedure TfrmDelete.imgHomeClick(Sender: TObject);
 begin
+  lblSearch.Show;
+  cmbShowNames.Show;
+  lblSelect.Show;
+  edtSearch.Show;
+  pnlSearch.Show;
+  lblname.Hide;
+  lblTimesWatched.Hide;
+  cmbTimesWatched.Hide;
+  lblSeasons.Hide;
+  cmbSeasons.Hide;
+  pnlDelete.Hide;
+
   frmDelete.Hide;
   frmHome.Show;
 end;

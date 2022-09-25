@@ -192,8 +192,8 @@ Var
   iOrderWatched, iRow : integer;
 begin
   //reset the string grid to "refresh" it of outdated shows that have been deleted
-  stgWatched.RowCount := 1;
-  stgWatched.ColCount := 1;
+  stgWatched.RowCount := 0;
+  stgWatched.ColCount := 0;
   //setup size and count of rows and coloumns
   stgWatched.ColCount := 4;
   dmShowTRacker.tblWatched.Open;
