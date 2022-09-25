@@ -107,6 +107,7 @@ object frmHome: TfrmHome
     Height = 41
     Caption = 'pnlStats'
     TabOrder = 5
+    OnClick = pnlStatsClick
     OnMouseEnter = pnlStatsMouseEnter
     OnMouseLeave = pnlStatsMouseLeave
   end

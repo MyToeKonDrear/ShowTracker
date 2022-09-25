@@ -552,6 +552,8 @@ begin
   cmbSeasons.Hide;
   pnlDelete.Hide;
 
+  frmWatched.PopulatestgWatched;
+
   frmDelete.Hide;
   frmHome.Show;
 end;

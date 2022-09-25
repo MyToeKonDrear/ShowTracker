@@ -13,7 +13,8 @@ uses
   TimesWatched_u in 'TimesWatched_u.pas' {frmTimesWatched},
   Tracker_u in 'Tracker_u.pas' {frmTracker},
   ToWatch_u in 'ToWatch_u.pas' {frmToWatch},
-  AddToWatch_u in 'AddToWatch_u.pas' {frmAddToWatch};
+  AddToWatch_u in 'AddToWatch_u.pas' {frmAddToWatch},
+  Stats_u in 'Stats_u.pas' {frmStats};
 
 {$R *.res}
 
@@ -33,5 +34,6 @@ begin
   Application.CreateForm(TfrmTracker, frmTracker);
   Application.CreateForm(TfrmToWatch, frmToWatch);
   Application.CreateForm(TfrmAddToWatch, frmAddToWatch);
+  Application.CreateForm(TfrmStats, frmStats);
   Application.Run;
 end.

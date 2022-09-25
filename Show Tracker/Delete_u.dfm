@@ -113,7 +113,7 @@ object frmDelete: TfrmDelete
   end
   object pnlDelete: TPanel
     Left = 256
-    Top = 224
+    Top = 231
     Width = 185
     Height = 41
     Caption = 'pnlDelete'

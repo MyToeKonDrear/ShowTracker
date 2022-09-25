@@ -42,6 +42,7 @@ type
     procedure pnlToWatchMouseLeave(Sender: TObject);
     procedure pnlStatsMouseEnter(Sender: TObject);
     procedure pnlStatsMouseLeave(Sender: TObject);
+    procedure pnlStatsClick(Sender: TObject);
   private
     { Private declarations }
     shpHeader : TShape;
@@ -61,7 +62,7 @@ var
 
 implementation
 
-uses Watched_u, AddWatched_u, Edit_u, Delete_u, TimesWatched_u, Tracker_u, ToWatch_u;
+uses Watched_u, AddWatched_u, Edit_u, Delete_u, TimesWatched_u, Tracker_u, ToWatch_u, Stats_u;
 
 {$R *.dfm}
 
@@ -142,10 +143,10 @@ begin
   pnlWatched.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   pnlWatched.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlWatched.font.Size := 16;
-  pnlWatched.Top := Trunc(0.5 * Screen.Height);
+  pnlWatched.Top := Trunc(0.2 * Screen.Height);
   pnlWatched.Width := Trunc(0.29 * Screen.Width);
   pnlWatched.Height := Trunc(0.1 * Screen.Height);
-  pnlWatched.Left := Trunc(0.51 * Screen.Width);
+  pnlWatched.Left := Trunc(0.2 * Screen.Width);
   pnlWatched.BorderStyle := bsNone;
   pnlWatched.BevelOuter := bvNone;
   pnlWatched.Cursor := crHandPoint;
@@ -172,7 +173,7 @@ begin
   pnlTracker.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
   pnlTracker.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlTracker.font.Size := 16;
-  pnlTracker.Top := Trunc(0.2 * Screen.Height);
+  pnlTracker.Top := Trunc(0.5 * Screen.Height);
   pnlTracker.Width := Trunc(0.29 * Screen.Width);
   pnlTracker.Height := Trunc(0.1 * Screen.Height);
   pnlTracker.Left := Trunc(0.2 * Screen.Width);
@@ -190,7 +191,7 @@ begin
   pnlToWatch.Top := Trunc(0.5 * Screen.Height);
   pnlToWatch.Width := Trunc(0.29 * Screen.Width);
   pnlToWatch.Height := Trunc(0.1 * Screen.Height);
-  pnlToWatch.Left := Trunc(0.2 * Screen.Width);
+  pnlToWatch.Left := Trunc(0.51 * Screen.Width);
   pnlToWatch.BorderStyle := bsNone;
   pnlToWatch.BevelOuter := bvNone;
   pnlToWatch.Cursor := crHandPoint;
@@ -313,6 +314,12 @@ end;
 procedure TfrmHome.pnlDeleteMouseLeave(Sender: TObject);
 begin
   pnlDelete.Color := rgb(frmHome.arrTertiaryColor[1],frmHome.arrTertiaryColor[2],frmHome.arrTertiaryColor[3]);
+end;
+
+procedure TfrmHome.pnlStatsClick(Sender: TObject);
+begin
+  frmHome.Hide;
+  frmStats.Show;
 end;
 
 procedure TfrmHome.pnlStatsMouseEnter(Sender: TObject);

@@ -191,9 +191,13 @@ procedure TfrmWatched.PopulatestgWatched;
 Var
   iOrderWatched, iRow : integer;
 begin
+  //reset the string grid to "refresh" it of outdated shows that have been deleted
+  stgWatched.RowCount := 1;
+  stgWatched.ColCount := 1;
   //setup size and count of rows and coloumns
   stgWatched.ColCount := 4;
   dmShowTRacker.tblWatched.Open;
+  dmShowTracker.tblWatched.Refresh;
   stgWatched.RowCount := dmShowTracker.tblWatched.RecordCount + 1;//skip a row between each entry for aesthetically-pleasing spacing
   dmShowTracker.tblWatched.Close;
 
