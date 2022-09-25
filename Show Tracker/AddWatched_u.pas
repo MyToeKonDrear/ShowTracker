@@ -174,9 +174,9 @@ begin
   pnlEnter.Font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   pnlEnter.font.Size := 16;
   pnlEnter.Top := Trunc(0.8 * Screen.Height);
-  pnlEnter.Width := lblSeasons.Width;
+  pnlEnter.width := Trunc(0.25 * screen.Width);
   pnlEnter.Height := Trunc(0.03 * Screen.Height);
-  pnlEnter.Left := ((edtShowName.Width + edtShowName.left) - pnlEnter.Width);
+  pnlEnter.Left := Trunc(0.5 * screen.Width);
   pnlEnter.BorderStyle := bsNone;
   pnlEnter.BevelOuter := bvNone;
   pnlEnter.Cursor := crHandPoint;

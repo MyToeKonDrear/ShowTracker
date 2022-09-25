@@ -251,7 +251,7 @@ end;
 procedure TfrmDelete.cmbTimesWatchedClick(Sender: TObject);
 Var
   sName : string;
-  iPrimaryKey : integer;
+  iPrimaryKey, iTimesWatched : integer;
 begin
   sName := cmbTimesWatched.Items[cmbTimesWatched.ItemIndex];
   iPrimaryKey := arrPrimaryKeyTimesWatched[cmbTimesWatched.ItemIndex + 1];
@@ -263,6 +263,24 @@ begin
        MessageDLG(sName + ' was not deleted', mtInformation,[mbOK],0);
        EXIT;
      end;
+
+  //Remove times watched deleted from tblWatched times watched
+  dmShowTracker.tblNewSeasons.Open;
+  dmShowTracker.tblNewSeasons.First;
+  while not (dmShowTracker.tblNewSeasons['PrimaryKey'] = iPrimaryKey) do
+    dmShowTracker.tblNewSeasons.Next;
+
+  iTimesWatched := dmShowTracker.tblNewSeasons['OldTimesWatched'];
+  iID := dmShowTracker.tblNewSeasons['ID'];
+
+  dmShowTracker.tblNewSeasons.Close;
+
+  with dmShowTracker do
+  begin
+    qryShowTracker.SQL.Clear;
+    qryShowTracker.SQL.Add('UPDATE Watched SET TimesWatched = ' + IntToStr(iTimesWatched) + ' WHERE ID = ' + IntToStr(iID));
+    qryShowTracker.ExecSQL;
+  end;
 
   //delete from database
   with dmShowTracker do
@@ -444,7 +462,7 @@ begin
   //cmbTimesWatched
   cmbTimesWatched.Left := Trunc(0.25 * Screen.Width);
   cmbTimesWatched.Top := Trunc(0.35 * Screen.Height);
-  cmbTimesWatched.Width := Trunc(0.3 * Screen.Width);
+  cmbTimesWatched.Width := Trunc(0.5 * Screen.Width);
   cmbTimesWatched.Font.Size := 16;
   cmbTimesWatched.font.Color := rgb(frmHome.arrTextColor[1],frmHome.arrTextColor[2],frmHome.arrTextColor[3]);
   cmbTimesWatched.Text := 'Select a rewatch to delete from here';
