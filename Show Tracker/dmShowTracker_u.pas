@@ -14,6 +14,7 @@ type
     tblNewSeasons: TADOTable;
     tblTracker: TADOTable;
     procedure DataModuleCreate(Sender: TObject);
+    procedure tblWatchedAfterOpen(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -38,6 +39,11 @@ begin
     'Jet OLEDB:Database Password=*************';
   conShowTracker.Provider := 'Provider=Microsoft.Jet.OLEDB.4.0;';
   conShowTracker.Open;
+end;
+
+procedure TdmShowTracker.tblWatchedAfterOpen(DataSet: TDataSet);
+begin
+  dmShowTracker.tblWatched.Sort := 'DateCompleted ASC';
 end;
 
 end.

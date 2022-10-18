@@ -66,7 +66,6 @@ begin
 
   lblName.Caption := dmShowTracker.tblWatched['ShowName'];
   spnTimesWatched.Value := dmShowTracker.tblWatched['TimesWatched'];
-  dtpDateCompleted.Date := dmShowTracker.tblWatched['DateCompleted'];
 
   dmShowTracker.tblWatched.Close;
 end;
@@ -152,6 +151,7 @@ begin
   dtpDateCompleted.BorderStyle := bsNone;
   dtpDateCompleted.DateFormat := 'dd/MMM/yyyy';
   dtpDateCompleted.Cursor := crHandPoint;
+  dtpDateCompleted.Date := Date;
 
   //pnlEnter
   pnlEnter.Caption := 'Enter';

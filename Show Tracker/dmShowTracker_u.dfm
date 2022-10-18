@@ -23,6 +23,7 @@ object dmShowTracker: TdmShowTracker
   object tblWatched: TADOTable
     Connection = conShowTracker
     CursorType = ctStatic
+    AfterOpen = tblWatchedAfterOpen
     TableName = 'Watched'
     Left = 24
     Top = 96
